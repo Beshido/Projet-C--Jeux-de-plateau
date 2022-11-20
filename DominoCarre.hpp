@@ -16,8 +16,6 @@ private:
 
 public:
     DominoCarre(vector <Tuile> sacTuiles);
-    void afficherSac();
-    void afficherPlateau();
     void melangerSac();
     void distribuerTuiles();
     void placerTuile(int x, int y, int orientation);

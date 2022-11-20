@@ -9,5 +9,8 @@ DominoCarre::DominoCarre(vector <Tuile> sacTuiles){
     this->sacTuiles = sacTuiles;
 }
 
+void DominoCarre::melangerSac(){
+    //TODO
+}
 
 
