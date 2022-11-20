@@ -9,6 +9,25 @@ Tuile::Tuile(int valeurNord, int valeurSud, int valeurEst, int valeurOuest){
     this->valeurEst = valeurEst;
     this->valeurOuest = valeurOuest;
 }
+int Tuile::getValeurNord(){
+    return this->valeurNord;
+}
+int Tuile::getValeurSud(){
+    return this->valeurSud;
+}
+int Tuile::getValeurEst(){
+    return this->valeurEst;
+}
+int Tuile::getValeurOuest(){
+    return this->valeurOuest;
+}
 
+void Tuile::Tourner(){
+    int temp = this->valeurNord;
+    this->valeurNord = this->valeurOuest;
+    this->valeurOuest = this->valeurSud;
+    this->valeurSud = this->valeurEst;
+    this->valeurEst = temp;
+}
 
     
