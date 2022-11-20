@@ -12,12 +12,11 @@ using namespace std;
 class DominoCarre{
 private:
     vector<Tuile> sacTuiles;
-    vector<Tuile> plateau;
+    vector<vector<Tuile>> plateau;
 
 public:
     DominoCarre(vector <Tuile> sacTuiles);
-    void melangerSac();
-    void distribuerTuiles();
+    Tuile piocherTuile();
     void placerTuile(int x, int y, int orientation);
     void tournerTuile(int x, int y);
     void deplacerTuile(int x1, int y1, int x2, int y2);
