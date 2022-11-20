@@ -19,8 +19,6 @@ public:
     Tuile piocherTuile();
     void placerTuile(int x, int y, int orientation);
     void tournerTuile(int x, int y);
-    void deplacerTuile(int x1, int y1, int x2, int y2);
-    void supprimerTuile(int x, int y);
     void sauvegarderPartie();
     void chargerPartie();
     void afficherAide();
