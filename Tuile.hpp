@@ -15,6 +15,12 @@ private:
 
 public:
     Tuile(int valeurNord, int valeurSud, int valeurEst, int valeurOuest);
+    int getValeurNord();
+    int getValeurSud();
+    int getValeurEst();
+    int getValeurOuest();
+    void Tourner();
+
 
 };
 
