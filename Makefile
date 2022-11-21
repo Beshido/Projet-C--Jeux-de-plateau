@@ -15,4 +15,4 @@ main : main.o
 	
 
 clean :
-	rm *.o sfml-app
+	rm *.o *.out sfml-app
