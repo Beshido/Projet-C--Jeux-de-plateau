@@ -1,3 +1,5 @@
+ #include "Bouton.hpp"
+#include <iostream>
 #include <SFML/Graphics.hpp>
 #include <string>
 
@@ -8,22 +10,23 @@ int main()
     // shape.setFillColor(sf::Color::Blue);
     // sf::RectangleShape box(sf::Vector2f(100.f, 200.f));
     // box.setFillColor(sf::Color::Red);
-    sf::Texture backgroundTexture;
-    sf::Sprite background;
-    backgroundTexture.loadFromFile("./background.png");
-    background.setTexture(backgroundTexture);
+    // sf::Texture backgroundTexture;
+    // sf::Sprite background;
+    // backgroundTexture.loadFromFile("./background.png");
+    // background.setTexture(backgroundTexture);
+    Bouton bouton { "Domino carré", 70.f, 70.f, 10.f, 50.f, sf::Color::Blue };
 
-    while (window.isOpen())
-    {
+    while (window.isOpen()) {
         sf::Event event;
-        while (window.pollEvent(event))
-        {
+        while (window.pollEvent(event)) {
             if (event.type == sf::Event::Closed)
                 window.close();
-        }
+            bouton.checkClick(event);
+        } 
 
         window.clear();
-        window.draw(background);
+        window.draw(bouton.getRectangle());
+        // window.draw(box);
         // window.draw(box);
         window.display();
     }
