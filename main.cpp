@@ -8,10 +8,10 @@ int main()
     sf::RenderWindow window(sf::VideoMode(500, 500), "SFML works!");
 
     sf::Font font;
-    font.loadFromFile("./Agatha.ttf");
+    font.loadFromFile("./fonts/Agatha.ttf");
 
     sf::Texture backgroundTexture;
-    backgroundTexture.loadFromFile("./fleurs.png");
+    backgroundTexture.loadFromFile("./img/fleurs.png");
     sf::Sprite background;
     background.setTexture(backgroundTexture);
 
