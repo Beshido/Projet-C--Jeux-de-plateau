@@ -1,11 +1,11 @@
 CPP=g++ --std=c++11 -Wall
 
 all : Tuile DominoCarre Bouton main
-	$(CPP) Tuile.o DominoCarre.o Bouton.o main.o -o sfml-app -lsfml-graphics -lsfml-window -lsfml-system
+	$(CPP) Tuile.o DominoCarre.o gui/Bouton.o main.o -o sfml-app -lsfml-graphics -lsfml-window -lsfml-system
 	./sfml-app
 
-Bouton : Bouton.o
-	$(CPP) -c Bouton.cpp
+Bouton : gui/Bouton.o
+	$(CPP) -c gui/Bouton.cpp
 
 DominoCarre : DominoCarre.o
 	$(CPP) -c DominoCarre.cpp
@@ -17,4 +17,4 @@ main : main.o
 	$(CPP) -c main.cpp
 
 clean :
-	rm *.o *.out sfml-app
+	rm *.o gui/*.o sfml-app
