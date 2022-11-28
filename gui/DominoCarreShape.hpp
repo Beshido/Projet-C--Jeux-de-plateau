@@ -1,24 +1,21 @@
 #ifndef _DominoCarreShape
 #define _DominoCarreShape
 
-#include "../DominoCarre.hpp"
 #include <iostream>
+#include <SFML/Graphics.hpp>
+#include "../Tuile.hpp"
 
-class DominoCarreShape {
-    private:
-        vector<Tuile> sacTuiles;
-        vector<vector<Tuile>> plateau;
+class DominoCarreShape : public sf::Drawable {
 
     public:
-        DominoCarreShape(vector <Tuile> sacTuiles);
-        Tuile piocherTuile();
-        void placerTuile(int x, int y, int orientation);
-        void tournerTuile(int x, int y);
-        void sauvegarderPartie();
-        void chargerPartie();
-        void afficherAide();
-        void afficherRegles();
-        void quitter();
+        DominoCarreShape(Tuile* dominoCarre);
+
+    private:
+        sf::Text nombreHaut;
+        sf::Text nombreDroite;
+        sf::Text nombreBas;
+        sf::Text nombreGauche;
+
 };
 
 
