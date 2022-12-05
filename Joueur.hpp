@@ -4,7 +4,7 @@
 #include <stdio.h>
 #include <vector>
 
-#include <iosteam>
+#include <iostream>
 using namespace std;
 
 class Joueur{
@@ -15,7 +15,7 @@ private:
     int id;
 
 public:
-    Joueur(string nom, int id);
+    Joueur(string nom);
     void ajouterTuile(Tuile tuile);
     void afficherScore();
     void afficherNom();
