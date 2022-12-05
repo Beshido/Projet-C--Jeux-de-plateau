@@ -26,6 +26,7 @@ bool Bouton::checkClick(sf::Event event) {
 }
 
 void Bouton::draw(sf::RenderTarget& target, sf::RenderStates states) const {
+    states.transform *= getTransform();
     target.draw(rectangle, states);
     target.draw(texte, states);
 }
