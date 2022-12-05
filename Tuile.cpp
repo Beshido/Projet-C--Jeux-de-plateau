@@ -1,5 +1,6 @@
 #include "Tuile.hpp"
 #include <iostream>
+#include <array>
 
 using namespace std;
 
@@ -20,6 +21,19 @@ int Tuile::getValeurEst(){
 }
 int Tuile::getValeurOuest(){
     return this->valeurOuest;
+}
+array<int,3> intToArray(int valeur){
+    array<int,3> array;
+    for (int i = 2; i >= 0; i--) {
+    if(valeur > 0){
+        array[i] = valeur % 10;
+        valeur /= 10;
+    }
+    else{
+        array[i] = 0;
+    }
+}
+return array;
 }
 
 void Tuile::TournerGauche(){

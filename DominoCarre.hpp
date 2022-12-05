@@ -17,7 +17,7 @@ private:
 public:
     DominoCarre(vector <Tuile> sacTuiles);
     Tuile piocherTuile();
-    void placerTuile(int x, int y, Tuile tuile);
+    void placerTuile(int x, int y, Tuile tuile, vector<vector<Tuile>> plateau);
     void sauvegarderPartie();
     void chargerPartie();
     void afficherAide();

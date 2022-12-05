@@ -2,6 +2,7 @@
 #define _Tuile
 
 #include "Tuile.hpp"
+#include <array>
 
 #include <iostream>
 using namespace std;
@@ -21,7 +22,7 @@ public:
     int getValeurOuest();
     void TournerGauche();
     void TournerDroite();
-
+    array<int,3> intToArray(int valeur);
 
 };
 
