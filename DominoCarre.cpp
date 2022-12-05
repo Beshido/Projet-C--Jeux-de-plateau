@@ -15,3 +15,4 @@ Tuile DominoCarre::piocherTuile(){
     this->sacTuiles.erase(this->sacTuiles.begin() + random);
     return this->sacTuiles[random];      
 }
+

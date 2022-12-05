@@ -19,7 +19,8 @@ public:
     int getValeurSud();
     int getValeurEst();
     int getValeurOuest();
-    void Tourner();
+    void TournerGauche();
+    void TournerDroite();
 
 
 };

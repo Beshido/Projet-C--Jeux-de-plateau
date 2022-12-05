@@ -22,12 +22,19 @@ int Tuile::getValeurOuest(){
     return this->valeurOuest;
 }
 
-void Tuile::Tourner(){
+void Tuile::TournerGauche(){
     int temp = this->valeurNord;
     this->valeurNord = this->valeurOuest;
     this->valeurOuest = this->valeurSud;
     this->valeurSud = this->valeurEst;
     this->valeurEst = temp;
+}
+void Tuile::TournerDroite(){
+    int temp = this->valeurNord;
+    this->valeurNord = this->valeurEst;
+    this->valeurEst = this->valeurSud;
+    this->valeurSud = this->valeurOuest;
+    this->valeurOuest = temp;
 }
 
     
