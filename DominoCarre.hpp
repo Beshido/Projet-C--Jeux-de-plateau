@@ -2,27 +2,27 @@
 #define _DominoCarre
 
 #include "DominoCarre.hpp"
-#include <vector>
-#include "Tuile.hpp"
-
-
 #include <iostream>
+#include <random>
+#include "Tuile.hpp"
+#include <vector>
+
 using namespace std;
 
-class DominoCarre{
-private:
-    vector<Tuile> sacTuiles;
-    vector<vector<Tuile>> plateau;
+class DominoCarre {
+    private:
+        vector<Tuile<int>> sacTuiles;
+        vector<vector<Tuile<int>>> plateau;
 
-public:
-    DominoCarre(vector <Tuile> sacTuiles);
-    Tuile piocherTuile();
-    void placerTuile(int x, int y, Tuile tuile, vector<vector<Tuile>> plateau);
-    void sauvegarderPartie();
-    void chargerPartie();
-    void afficherAide();
-    void afficherRegles();
-    void quitter();
+    public:
+        DominoCarre(vector<Tuile<int>> sacTuiles);
+        Tuile<int> piocherTuile();
+        void placerTuile(int x, int y, Tuile<int> tuile, vector<vector<Tuile<int>>> plateau);
+        void sauvegarderPartie();
+        void chargerPartie();
+        void afficherAide();
+        void afficherRegles();
+        void quitter();
 };
 
 

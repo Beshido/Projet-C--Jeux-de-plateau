@@ -1,16 +1,16 @@
 #include "gui/Bouton.hpp"
-#include "gui/DominoCarreTuile.hpp"
-#include "DominoCarre.hpp"
+#include "gui/DominoCarreTuileGUI.hpp"
 #include <iostream>
 #include <SFML/Graphics.hpp>
 #include <string>
+#include "Tuile.hpp"
 
 int main()
 {
-    sf::RenderWindow window(sf::VideoMode(500, 500), "SFML works!");
+    sf::RenderWindow window(sf::VideoMode(1000, 1000), "SFML works!");
 
     sf::Font font;
-    font.loadFromFile("./fonts/arial.ttf");
+    font.loadFromFile("./fonts/SpaceMono-Regular.ttf");
 
     sf::Texture backgroundTexture;
     backgroundTexture.loadFromFile("./img/fleurs.png");
@@ -20,8 +20,8 @@ int main()
     Bouton boutonDomino { 70.f, 70.f, 300.f, 70.f, "Domino carre", &font };
     Bouton boutonTrax { 70.f, 200.f, 300.f, 70.f, sf::Color::Red, "Trax", &font, sf::Color::Black };
 
-    Tuile domino { 100, 400, 300, 200 };
-    DominoCarreTuile dominoGui { &domino, &font };
+    Tuile<int> domino { 100, 400, 300, 200 };
+    DominoCarreTuileGUI dominoGui { &domino, &font };
     dominoGui.setPosition(50, 50);
 
     while (window.isOpen()) {
@@ -34,8 +34,8 @@ int main()
             }
             if (boutonTrax.checkClick(event)) {
                 std::cout << "Le bouton Trax a été cliqué !" << std::endl;
-                dominoGui.setPosition(0, 0);
-                dominoGui.setSize(200);
+                dominoGui.getTuile()->tournerDroite();
+                dominoGui.updateValues();
             }
         } 
 

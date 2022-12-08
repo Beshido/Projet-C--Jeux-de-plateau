@@ -2,30 +2,49 @@
 #define _Tuile
 
 #include "Tuile.hpp"
-#include <array>
 
-#include <iostream>
 using namespace std;
 
-class Tuile{
-private:
-    int valeurNord;
-    int valeurSud;
-    int valeurEst;
-    int valeurOuest;
+template <typename T> class Tuile {
+    private:
+        T valeurNord;
+        T valeurOuest;
+        T valeurEst;
+        T valeurSud;
 
-public:
-    Tuile(int valeurNord, int valeurSud, int valeurEst, int valeurOuest);
-    int getValeurNord();
-    int getValeurSud();
-    int getValeurEst();
-    int getValeurOuest();
-    void TournerGauche();
-    void TournerDroite();
-    array<int,3> intToArray(int valeur);
+    public:
+        Tuile(T valeurNord, T valeurOuest, T valeurEst, T valeurSud): valeurNord { valeurNord }, valeurOuest { valeurOuest }, valeurEst { valeurEst }, valeurSud { valeurSud } {}
 
+        T getValeurNord() {
+            return valeurNord;
+        }
+        
+        T getValeurOuest() {
+            return valeurOuest;
+        }
+        
+        T getValeurEst() {
+            return valeurEst;
+        }
+        
+        T getValeurSud() {
+            return valeurSud;
+        }
+
+        void tournerGauche() {
+            T temp = valeurNord;
+            valeurNord = valeurOuest;
+            valeurOuest = valeurSud;
+            valeurSud = valeurEst;
+            valeurEst = temp;
+        }
+        void tournerDroite() {
+            T temp = valeurNord;
+            valeurNord = valeurEst;
+            valeurEst = valeurSud;
+            valeurSud = valeurOuest;
+            valeurOuest = temp;
+        }
 };
-
-
 
 #endif
