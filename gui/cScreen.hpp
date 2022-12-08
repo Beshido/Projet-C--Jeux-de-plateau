@@ -1,6 +1,11 @@
+#ifndef _cScreen
+#define _cScreen
+
 #include <SFML/Graphics.hpp>
 
 class cScreen {
     public:
-        virtual int Run(sf::RenderWindow &App) = 0;
+        virtual int run(sf::RenderWindow &window) = 0;
 };
+
+#endif

@@ -1,51 +1,28 @@
 #include "gui/Bouton.hpp"
-#include "gui/DominoCarreTuileGUI.hpp"
+#include "gui/screens.hpp"
 #include <iostream>
 #include <SFML/Graphics.hpp>
 #include <string>
 #include "Tuile.hpp"
 
-int main()
-{
-    sf::RenderWindow window(sf::VideoMode(1000, 1000), "SFML works!");
+int main() {
+	std::vector<cScreen*> Screens;
+	int screen = 0;
 
-    sf::Font font;
-    font.loadFromFile("./fonts/SpaceMono-Regular.ttf");
+	//Window creation
+	sf::RenderWindow App(sf::VideoMode(640, 480, 32), "SFML Demo 3");
 
-    sf::Texture backgroundTexture;
-    backgroundTexture.loadFromFile("./img/fleurs.png");
-    sf::Sprite background;
-    background.setTexture(backgroundTexture);
+	//Mouse cursor no more visible
+	App.setMouseCursorVisible(false);
 
-    Bouton boutonDomino { 70.f, 70.f, 300.f, 70.f, "Domino carre", &font };
-    Bouton boutonTrax { 70.f, 200.f, 300.f, 70.f, sf::Color::Red, "Trax", &font, sf::Color::Black };
+	//Screens preparations
+	menuPrincipal menuPrincipal;
+	Screens.push_back(&menuPrincipal);
 
-    Tuile<int> domino { 100, 400, 300, 200 };
-    DominoCarreTuileGUI dominoGui { &domino, &font };
-    dominoGui.setPosition(50, 50);
+	//Main loop
+	while (screen >= 0) {
+		screen = Screens[screen]->run(App);
+	}
 
-    while (window.isOpen()) {
-        sf::Event event;
-        while (window.pollEvent(event)) {
-            if (event.type == sf::Event::Closed)
-                window.close();
-            if (boutonDomino.checkClick(event)) {
-                std::cout << "Le bouton Domino a été cliqué !" << std::endl;
-            }
-            if (boutonTrax.checkClick(event)) {
-                std::cout << "Le bouton Trax a été cliqué !" << std::endl;
-                dominoGui.getTuile()->tournerDroite();
-                dominoGui.updateValues();
-            }
-        } 
-
-        window.clear();
-        window.draw(background);
-        window.draw(boutonDomino);
-        window.draw(boutonTrax);
-        window.draw(dominoGui);
-        window.display();
-    }
-
-    return 0;
+	return EXIT_SUCCESS;
 }
