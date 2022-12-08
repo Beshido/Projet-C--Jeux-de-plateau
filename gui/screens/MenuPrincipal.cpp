@@ -23,6 +23,7 @@ int MenuPrincipal::run(sf::RenderWindow &window) {
                 window.close();
             if (boutonDomino.isClicked(event)) {
                 std::cout << "Le bouton Domino a été cliqué !" << std::endl;
+                return 1; // lance le screen domino
             }
             if (boutonTrax.isClicked(event)) {
                 std::cout << "Le bouton Trax a été cliqué !" << std::endl;

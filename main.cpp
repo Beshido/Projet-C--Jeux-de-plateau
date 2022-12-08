@@ -6,22 +6,24 @@
 #include <string>
 
 int main() {
-	std::vector<cScreen*> Screens;
+	std::vector<cScreen*> screens;
 	int screen = 0;
 
 	//Window creation
-	sf::RenderWindow App(sf::VideoMode(640, 480, 32), "SFML Demo 3");
+	sf::RenderWindow window(sf::VideoMode(640, 480, 32), "SFML Demo 3");
 
 	//Mouse cursor no more visible
-	App.setMouseCursorVisible(false);
+	window.setMouseCursorVisible(false);
 
 	//Screens preparations
 	MenuPrincipal menuPrincipal;
-	Screens.push_back(&menuPrincipal);
+	DominoCarreGUI dominoCarreGUI;
+	screens.push_back(&menuPrincipal);
+	screens.push_back(&dominoCarreGUI);
 
 	//Main loop
 	while (screen >= 0) {
-		screen = Screens[screen]->run(App);
+		screen = screens[screen]->run(window);
 	}
 
 	return EXIT_SUCCESS;
