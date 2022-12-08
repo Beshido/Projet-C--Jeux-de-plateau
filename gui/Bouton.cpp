@@ -16,7 +16,7 @@ Bouton::Bouton(float x, float y, float width, float height, sf::Color couleurRec
 
 Bouton::Bouton(float x, float y, float width, float height, std::string label, sf::Font* font) : Bouton(x, y, width, height, sf::Color::White, label, font, sf::Color::Black) {}
 
-bool Bouton::checkClick(sf::Event event) {
+bool Bouton::isClicked(sf::Event event) {
     if (event.type != sf::Event::MouseButtonPressed) 
         return false;
     return (event.mouseButton.x > rectangle.getPosition().x 

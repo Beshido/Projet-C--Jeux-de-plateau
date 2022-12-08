@@ -21,10 +21,10 @@ int menuPrincipal::run(sf::RenderWindow &window) {
         while (window.pollEvent(event)) {
             if (event.type == sf::Event::Closed)
                 window.close();
-            if (boutonDomino.checkClick(event)) {
+            if (boutonDomino.isClicked(event)) {
                 std::cout << "Le bouton Domino a été cliqué !" << std::endl;
             }
-            if (boutonTrax.checkClick(event)) {
+            if (boutonTrax.isClicked(event)) {
                 std::cout << "Le bouton Trax a été cliqué !" << std::endl;
                 dominoGui.getTuile()->tournerDroite();
                 dominoGui.updateValues();
