@@ -17,7 +17,7 @@ int main() {
 
 	//Screens preparations
 	MenuPrincipal menuPrincipal;
-	DominoCarreGUI dominoCarreGUI;
+	DominoCarreGUI dominoCarreGUI { NULL };
 	screens.push_back(&menuPrincipal);
 	screens.push_back(&dominoCarreGUI);
 
