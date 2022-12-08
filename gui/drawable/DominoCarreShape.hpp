@@ -1,14 +1,13 @@
 #ifndef _DominoCarreShape
 #define _DominoCarreShape
 
+#include "../../Tuile.hpp"
 #include <iostream>
 #include <SFML/Graphics.hpp>
-#include "../Tuile.hpp"
 
 class DominoCarreShape : public sf::Drawable {
-
     public:
-        DominoCarreShape(Tuile* dominoCarre);
+        DominoCarreShape(Tuile<int>* dominoCarre);
 
     private:
         sf::Text nombreHaut;

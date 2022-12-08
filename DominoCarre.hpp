@@ -2,9 +2,9 @@
 #define _DominoCarre
 
 #include "DominoCarre.hpp"
+#include "Tuile.hpp"
 #include <iostream>
 #include <random>
-#include "Tuile.hpp"
 #include <vector>
 
 using namespace std;

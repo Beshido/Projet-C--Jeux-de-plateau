@@ -1,23 +1,23 @@
 CPP=g++ --std=c++11 -Wall
 
-all : DominoCarre Bouton DominoCarreTuileGUI menuPrincipal main
-	$(CPP) DominoCarre.o gui/Bouton.o gui/DominoCarreTuileGUI.o gui/menuPrincipal.o main.o -o sfml-app -lsfml-graphics -lsfml-window -lsfml-system
+all : Bouton DominoCarreTuileGUI MenuPrincipal DominoCarre main
+	$(CPP) gui/drawable/Bouton.o gui/drawable/DominoCarreTuileGUI.o gui/screens/MenuPrincipal.o DominoCarre.o main.o -o sfml-app -lsfml-graphics -lsfml-window -lsfml-system
 	./sfml-app
 
-Bouton : gui/Bouton.o
-	$(CPP) -c gui/Bouton.cpp
+Bouton : gui/drawable/Bouton.o
+	$(CPP) -c gui/drawable/Bouton.cpp
 
-DominoCarreTuileGUI : gui/DominoCarreTuileGUI.o
-	$(CPP) -c gui/DominoCarreTuileGUI.cpp
+DominoCarreTuileGUI : gui/drawable/DominoCarreTuileGUI.o
+	$(CPP) -c gui/drawable/DominoCarreTuileGUI.cpp
+
+MenuPrincipal : gui/screens/MenuPrincipal.o
+	$(CPP) -c gui/screens/MenuPrincipal.cpp
 
 DominoCarre : DominoCarre.o
 	$(CPP) -c DominoCarre.cpp
-
-menuPrincipal : gui/menuPrincipal.o
-	$(CPP) -c gui/menuPrincipal.cpp
 
 main : main.o
 	$(CPP) -c main.cpp
 
 clean :
-	rm *.o gui/*.o sfml-app
+	rm *.o gui/drawable/*.o gui/screens/*.o sfml-app

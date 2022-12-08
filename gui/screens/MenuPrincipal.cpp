@@ -1,6 +1,6 @@
-#include "./menuPrincipal.hpp"
+#include "MenuPrincipal.hpp"
 
-int menuPrincipal::run(sf::RenderWindow &window) {
+int MenuPrincipal::run(sf::RenderWindow &window) {
 	sf::Font font;
     font.loadFromFile("./fonts/SpaceMono-Regular.ttf");
 
@@ -12,9 +12,9 @@ int menuPrincipal::run(sf::RenderWindow &window) {
     Bouton boutonDomino { 70.f, 70.f, 300.f, 70.f, "Domino carre", &font };
     Bouton boutonTrax { 70.f, 200.f, 300.f, 70.f, sf::Color::Red, "Trax", &font, sf::Color::Black };
 
-    Tuile<int> domino { 100, 400, 300, 200 };
-    DominoCarreTuileGUI dominoGui { &domino, &font };
-    dominoGui.setPosition(50, 50);
+    //Tuile<int> domino { 100, 400, 300, 200 };
+    //DominoCarreTuileGUI dominoGui { &domino, &font };
+    //dominoGui.setPosition(50, 50);
 
     while (window.isOpen()) {
         sf::Event event;
@@ -26,8 +26,8 @@ int menuPrincipal::run(sf::RenderWindow &window) {
             }
             if (boutonTrax.isClicked(event)) {
                 std::cout << "Le bouton Trax a été cliqué !" << std::endl;
-                dominoGui.getTuile()->tournerDroite();
-                dominoGui.updateValues();
+                //dominoGui.getTuile()->tournerDroite();
+                //dominoGui.updateValues();
             }
         } 
 
@@ -35,7 +35,7 @@ int menuPrincipal::run(sf::RenderWindow &window) {
         window.draw(background);
         window.draw(boutonDomino);
         window.draw(boutonTrax);
-        window.draw(dominoGui);
+        //window.draw(dominoGui);
         window.display();
     }
 

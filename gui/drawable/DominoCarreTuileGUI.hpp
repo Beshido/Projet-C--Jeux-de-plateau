@@ -1,13 +1,11 @@
 #ifndef _DominoCarreTuileGUI
 #define _DominoCarreTuileGUI
 
+#include "../../Tuile.hpp"
 #include <iostream>
 #include <SFML/Graphics.hpp>
-#include "../Tuile.hpp"
-
 
 class DominoCarreTuileGUI : public sf::Drawable, public sf::Transformable {
-
     public:
         DominoCarreTuileGUI(Tuile<int>* dominoCarre, sf::Font* font);
         Tuile<int>* getTuile();

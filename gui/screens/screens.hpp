@@ -5,6 +5,6 @@
 #include "cScreen.hpp"
 
 //Including each screen of application
-#include "menuPrincipal.hpp"
+#include "MenuPrincipal.hpp"
 
 #endif // SCREENS_HPP_INCLUDED

@@ -1,6 +1,4 @@
 #include "Bouton.hpp"
-#include <iostream>
-#include <string>
 
 Bouton::Bouton(float x, float y, float width, float height, sf::Color couleurRectangle, std::string label, sf::Font* font, sf::Color couleurTexte): 
     rectangle { sf::RectangleShape(sf::Vector2f(width, height)) },

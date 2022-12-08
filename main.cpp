@@ -1,9 +1,9 @@
-#include "gui/Bouton.hpp"
-#include "gui/screens.hpp"
+#include "gui/drawable/Bouton.hpp"
+#include "gui/screens/screens.hpp"
+#include "Tuile.hpp"
 #include <iostream>
 #include <SFML/Graphics.hpp>
 #include <string>
-#include "Tuile.hpp"
 
 int main() {
 	std::vector<cScreen*> Screens;
@@ -16,7 +16,7 @@ int main() {
 	App.setMouseCursorVisible(false);
 
 	//Screens preparations
-	menuPrincipal menuPrincipal;
+	MenuPrincipal menuPrincipal;
 	Screens.push_back(&menuPrincipal);
 
 	//Main loop

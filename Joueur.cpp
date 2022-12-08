@@ -1,9 +1,5 @@
 #include "Joueur.hpp"
-#include <vector>
-#include "Tuile.hpp"
-#include <random>
 
-#include <iostream>
 using namespace std;
 
 Joueur::Joueur(string nom){
