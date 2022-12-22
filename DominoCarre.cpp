@@ -2,6 +2,7 @@
 
 const unsigned int DominoCarre::MIN_VALUE = 100;
 const unsigned int DominoCarre::MAX_VALUE = 999;
+const int SIZE = 8;
 
 DominoCarre::DominoCarre(const int unsigned longueur, const unsigned int hauteur, const unsigned int taille): 
     longueur { longueur }, hauteur { hauteur },
@@ -25,7 +26,7 @@ const Tuile<unsigned int> DominoCarre::piocherTuile() {
     return tuile;
 }
 
-void DominoCarre::placerTuile(int x, int y, Tuile<unsigned int> tuile , vector<vector<Tuile<unsigned int>>> plateau){
+/*void DominoCarre::placerTuile(int x, int y, Tuile<unsigned int> tuile , vector<vector<Tuile<unsigned int>>> plateau){
     if(x < 0 || y < 0 || x > this->plateau.size() || y > this->plateau.size() || this->plateau[x][y] != NULL || 
     (x > 0 && this->plateau[x-1][y].getValeurEst() != tuile.getValeurOuest()) || 
     x > 0 && this->plateau[x-1][y].getValeurNord() != tuile.getValeurSud()    || 
@@ -37,33 +38,30 @@ void DominoCarre::placerTuile(int x, int y, Tuile<unsigned int> tuile , vector<v
         this->plateau[x][y] = tuile;
     }
 
-}
-bool testEqual(int i, int j) {
-  // Check top and bottom faces
+}*/
+void DominoCarre::placerTuile(int i, int j, Tuile<unsigned int> tuile , vector<vector<Tuile<unsigned int>>> plateau){
   if (i > 0) {
-    if (grid[i][j].top != grid[i-1][j].bottom) {
-      return false;
+    if (this->plateau [i][j].getValeurNord() != this->plateau[i-1][j].getValeurSud()) {
+      return;
     }
   }
   if (i < SIZE - 1) {
-    if (grid[i][j].bottom != grid[i+1][j].top) {
-      return false;
+    if (this->plateau[i][j].getValeurSud() != this->plateau[i+1][j].getValeurNord()) {
+      return;
     }
   }
-
-  // Check left and right faces
   if (j > 0) {
-    if (grid[i][j].left != grid[i][j-1].right) {
-      return false;
+    if (this->plateau[i][j].getValeurOuest() != this->plateau[i][j-1].getValeurEst()) {
+      return;
     }
   }
   if (j < SIZE - 1) {
-    if (grid[i][j].right != grid[i][j+1].left) {
-      return false;
+    if (this->plateau[i][j].getValeurEst() != this->plateau[i][j+1].getValeurOuest()) {
+      return;
     }
   }
 
-  return true;
+  this->plateau[i][j] = tuile;
 }
 
 
