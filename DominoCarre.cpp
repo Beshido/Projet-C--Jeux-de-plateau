@@ -25,19 +25,47 @@ const Tuile<unsigned int> DominoCarre::piocherTuile() {
     return tuile;
 }
 
-//void DominoCarre::placerTuile(int x, int y, Tuile tuile , vector<vector<Tuile>> plateau){
- //   if(x < 0 || y < 0 || x > this->plateau.size() || y > this->plateau.size() || this->plateau[x][y] != NULL || 
- //   (x > 0 && this->plateau[x-1][y].getValeurEst() != tuile.getValeurOuest()) || 
- //   x > 0 && this->plateau[x-1][y].getValeurNord() != tuile.getValeurSud()    || 
- //   x > 0 && this ->plateau[x-1][y].getValeurSud() != tuile.getValeurNord()   ||
- //   x > 0 && this->plateau[x-1][y].getValeurOuest() != tuile.getValeurEst()){
-  //      cout << "La tuile ne peut pas être placée à ces coordonnées" << endl;
-   // }
-  //  else{
-   //     this->plateau[x][y] = tuile;
-   // }
+void DominoCarre::placerTuile(int x, int y, Tuile<unsigned int> tuile , vector<vector<Tuile<unsigned int>>> plateau){
+    if(x < 0 || y < 0 || x > this->plateau.size() || y > this->plateau.size() || this->plateau[x][y] != NULL || 
+    (x > 0 && this->plateau[x-1][y].getValeurEst() != tuile.getValeurOuest()) || 
+    x > 0 && this->plateau[x-1][y].getValeurNord() != tuile.getValeurSud()    || 
+    x > 0 && this ->plateau[x-1][y].getValeurSud() != tuile.getValeurNord()   ||
+    x > 0 && this->plateau[x-1][y].getValeurOuest() != tuile.getValeurEst()){
+        cout << "La tuile ne peut pas être placée à ces coordonnées" << endl;
+    }
+    else{
+        this->plateau[x][y] = tuile;
+    }
 
-//}
+}
+bool testEqual(int i, int j) {
+  // Check top and bottom faces
+  if (i > 0) {
+    if (grid[i][j].top != grid[i-1][j].bottom) {
+      return false;
+    }
+  }
+  if (i < SIZE - 1) {
+    if (grid[i][j].bottom != grid[i+1][j].top) {
+      return false;
+    }
+  }
+
+  // Check left and right faces
+  if (j > 0) {
+    if (grid[i][j].left != grid[i][j-1].right) {
+      return false;
+    }
+  }
+  if (j < SIZE - 1) {
+    if (grid[i][j].right != grid[i][j+1].left) {
+      return false;
+    }
+  }
+
+  return true;
+}
+
 
 const unsigned int DominoCarre::getLongueur() const {
     return longueur;
