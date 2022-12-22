@@ -8,7 +8,7 @@ Joueur::Joueur(string nom){
     this->score = 0;
 }
 
-void Joueur::ajouterTuile(Tuile tuile){
+void Joueur::ajouterTuile(Tuile<unsigned int> tuile){
     this->mainJoueur.push_back(tuile);
 }
 

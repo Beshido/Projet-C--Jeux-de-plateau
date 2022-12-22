@@ -10,14 +10,14 @@ using namespace std;
 
 class Joueur{
     private:
-        vector<Tuile> mainJoueur;
+        vector<Tuile<unsigned int>> mainJoueur;
         int score;
         string nom;
         int id;
 
     public:
         Joueur(string nom);
-        void ajouterTuile(Tuile tuile);
+        void ajouterTuile(Tuile<unsigned int> tuile);
         void afficherScore();
         void afficherNom();
         void afficherId();
