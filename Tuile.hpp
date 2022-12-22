@@ -13,21 +13,21 @@ template <typename T> class Tuile {
         T valeurSud;
 
     public:
-        Tuile(T valeurNord, T valeurOuest, T valeurEst, T valeurSud): valeurNord { valeurNord }, valeurOuest { valeurOuest }, valeurEst { valeurEst }, valeurSud { valeurSud } {}
+        Tuile(const T valeurNord, const T valeurOuest, const T valeurEst, const T valeurSud): valeurNord { valeurNord }, valeurOuest { valeurOuest }, valeurEst { valeurEst }, valeurSud { valeurSud } {}
 
-        T getValeurNord() {
+        const T getValeurNord() const {
             return valeurNord;
         }
         
-        T getValeurOuest() {
+        const T getValeurOuest() const {
             return valeurOuest;
         }
         
-        T getValeurEst() {
+        const T getValeurEst() const {
             return valeurEst;
         }
         
-        T getValeurSud() {
+        const T getValeurSud() const {
             return valeurSud;
         }
 
@@ -38,6 +38,7 @@ template <typename T> class Tuile {
             valeurSud = valeurEst;
             valeurEst = temp;
         }
+        
         void tournerDroite() {
             T temp = valeurNord;
             valeurNord = valeurEst;

@@ -1,26 +1,39 @@
 #include "Bouton.hpp"
 
-Bouton::Bouton(float x, float y, float width, float height, sf::Color couleurRectangle, std::string label, sf::Font* font, sf::Color couleurTexte): 
-    rectangle { sf::RectangleShape(sf::Vector2f(width, height)) },
-    couleurRectangle { couleurRectangle }, 
-    texte { sf::Text(label, *font, height / 2) },
-    couleurTexte { couleurTexte } {
-        rectangle.setPosition(x, y);
-        rectangle.setFillColor(couleurRectangle);
+const unsigned int Bouton::DEFAULT_WIDTH = 300;
+const unsigned int Bouton::DEFAULT_HEIGHT = 300;
 
-        texte.setPosition(x, y);
-        texte.setFillColor(couleurTexte);
+Bouton::Bouton(const std::string label, const sf::Font* font): 
+    rectangle { sf::RectangleShape { sf::Vector2f { DEFAULT_WIDTH, DEFAULT_HEIGHT } } },
+    texte { sf::Text { label, *font, DEFAULT_HEIGHT / 2 } } {
+        texte.setFillColor(sf::Color::Black);
+        rectangle.setFillColor(sf::Color::White);
     }
 
-Bouton::Bouton(float x, float y, float width, float height, std::string label, sf::Font* font) : Bouton(x, y, width, height, sf::Color::White, label, font, sf::Color::Black) {}
+const sf::Vector2f Bouton::getSize() const {
+    return rectangle.getSize();
+}
 
-bool Bouton::isClicked(sf::Event event) {
+void Bouton::setSize(const float width, const float height) {
+    rectangle.setSize(sf::Vector2f(width, height));
+    texte.setCharacterSize(height / 2);
+}
+
+void Bouton::setTextColor(const sf::Color color) {
+    texte.setFillColor(color);
+}
+
+void Bouton::setRectangleColor(const sf::Color color) {
+    rectangle.setFillColor(color);
+}
+
+bool Bouton::isClicked(const sf::Event event) {
     if (event.type != sf::Event::MouseButtonPressed) 
         return false;
-    return (event.mouseButton.x > rectangle.getPosition().x 
-        && event.mouseButton.x < rectangle.getPosition().x + rectangle.getSize().x
-        && event.mouseButton.y > rectangle.getPosition().y 
-        && event.mouseButton.y < rectangle.getPosition().y + rectangle.getSize().y);
+    return (event.mouseButton.x > getPosition().x 
+        && event.mouseButton.x < getPosition().x + rectangle.getSize().x
+        && event.mouseButton.y > getPosition().y 
+        && event.mouseButton.y < getPosition().y + rectangle.getSize().y);
 }
 
 void Bouton::draw(sf::RenderTarget& target, sf::RenderStates states) const {

@@ -7,16 +7,19 @@
 
 class Bouton: public sf::Drawable, public sf::Transformable {
     public:
-        Bouton(float x, float y, float width, float height, sf::Color couleurRectangle, std::string label, sf::Font* font, sf::Color couleurTexte);
-        Bouton(float x, float y, float width, float height, std::string label, sf::Font* font);
-        bool isClicked(sf::Event event);
+        Bouton(const std::string label, const sf::Font* font);
+        const sf::Vector2f getSize() const;
+        void setSize(const float width, const float height);
+        void setTextColor(const sf::Color color);
+        void setRectangleColor(const sf::Color color);
+        bool isClicked(const sf::Event event);
         virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 
     private:
+        static const unsigned int DEFAULT_WIDTH;
+        static const unsigned int DEFAULT_HEIGHT; 
         sf::RectangleShape rectangle;
-        sf::Color couleurRectangle;
         sf::Text texte;
-        sf::Color couleurTexte;
 };
 
 #endif

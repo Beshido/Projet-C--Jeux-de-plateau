@@ -9,12 +9,14 @@ int MenuPrincipal::run(sf::RenderWindow &window) {
     sf::Sprite background;
     background.setTexture(backgroundTexture);
 
-    Bouton boutonDomino { 70.f, 70.f, 300.f, 70.f, "Domino carre", &font };
-    Bouton boutonTrax { 70.f, 200.f, 300.f, 70.f, sf::Color::Red, "Trax", &font, sf::Color::Black };
-
-    //Tuile<int> domino { 100, 400, 300, 200 };
-    //DominoCarreTuileGUI dominoGui { &domino, &font };
-    //dominoGui.setPosition(50, 50);
+    Bouton boutonDomino { "Domino carre", &font };
+    boutonDomino.setPosition(70.f, 70.f);
+    boutonDomino.setSize(300.f, 70.f);
+    Bouton boutonTrax { "Trax", &font };
+    boutonTrax.setPosition(70.f, 200.f);
+    boutonTrax.setSize(300.f, 70.f);
+    boutonTrax.setTextColor(sf::Color::Black);
+    boutonTrax.setRectangleColor(sf::Color::Red);
 
     while (window.isOpen()) {
         sf::Event event;
@@ -23,12 +25,10 @@ int MenuPrincipal::run(sf::RenderWindow &window) {
                 window.close();
             if (boutonDomino.isClicked(event)) {
                 std::cout << "Le bouton Domino a été cliqué !" << std::endl;
-                return 1; // lance le screen domino
+                return 1;
             }
             if (boutonTrax.isClicked(event)) {
                 std::cout << "Le bouton Trax a été cliqué !" << std::endl;
-                //dominoGui.getTuile()->tournerDroite();
-                //dominoGui.updateValues();
             }
         } 
 
@@ -36,7 +36,6 @@ int MenuPrincipal::run(sf::RenderWindow &window) {
         window.draw(background);
         window.draw(boutonDomino);
         window.draw(boutonTrax);
-        //window.draw(dominoGui);
         window.display();
     }
 

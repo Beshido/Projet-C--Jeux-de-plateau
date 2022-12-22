@@ -1,7 +1,11 @@
-#include "DominoCarreGUI.hpp"
+#include "DominoCarreScreen.hpp"
+#include "../drawable/DominoCarreGUI.hpp"
+#include "../drawable/DominoCarreTuileGUI.hpp"
+#include "../../DominoCarre.hpp"
+#include "../../Tuile.hpp"
 
-int DominoCarreGUI::run(sf::RenderWindow &window) {
-
+int DominoCarreScreen::run(sf::RenderWindow &window) {
+    
     sf::Font font;
     font.loadFromFile("./fonts/SpaceMono-Regular.ttf");
 
@@ -10,9 +14,12 @@ int DominoCarreGUI::run(sf::RenderWindow &window) {
     sf::Sprite background;
     background.setTexture(backgroundTexture);
 
-    Tuile<int> domino { 100, 400, 300, 200 };
-    DominoCarreTuileGUI dominoGui { &domino, &font };
-    dominoGui.setPosition(50, 50);
+    const unsigned int l = 1;
+    const unsigned int h = 1; 
+    const unsigned int c = 10; 
+    DominoCarre dominoCarre { l, h, c };
+    DominoCarreGUI dominoCarreGui { &dominoCarre, &font };
+    dominoCarreGui.setSize(/* 70 *  */window.getSize().y/*  / 100 */);
 
     while (window.isOpen()) {
         sf::Event event;
@@ -23,7 +30,7 @@ int DominoCarreGUI::run(sf::RenderWindow &window) {
 
         window.clear();
         window.draw(background);
-        window.draw(dominoGui);
+        window.draw(dominoCarreGui);
         window.display();
     }
 
