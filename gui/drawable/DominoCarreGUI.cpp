@@ -5,7 +5,7 @@ DominoCarreGUI::DominoCarreGUI(DominoCarre* dominoCarre, sf::Font* font): domino
     for (size_t x = 0; x < dominoCarre->getLongueur(); x++) {
         dominoCarreTuilesGui.push_back(vector<DominoCarreTuileGUI>());
         for (size_t y = 0; y < dominoCarre->getHauteur(); y++) {
-            DominoCarreTuileGUI tuileGui { &dominoCarre->getPlateau().at(x).at(y), font };
+            DominoCarreTuileGUI tuileGui { dominoCarre->getPlateau().at(x).at(y), font };
             tuileGui.setPosition(x * tuileGui.getTaille(), y * tuileGui.getTaille());
             dominoCarreTuilesGui.at(x).push_back(tuileGui);
         }

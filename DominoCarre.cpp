@@ -6,22 +6,23 @@ const int SIZE = 8;
 
 DominoCarre::DominoCarre(const int unsigned longueur, const unsigned int hauteur, const unsigned int taille): 
     longueur { longueur }, hauteur { hauteur },
-    plateau { vector<vector<Tuile<unsigned int>>> { longueur, vector<Tuile<unsigned int>> { hauteur, Tuile<unsigned int> { 100, 100, 100, 100 } } } } {
+    plateau { vector<vector<Tuile<unsigned int>*>> { longueur, vector<Tuile<unsigned int>*> { hauteur, NULL } } } {
         srand(time(NULL));
         for (size_t i = 0; i < taille; i++) {
-            sacTuiles.push_back(Tuile<unsigned int> { 
+            Tuile<unsigned int> tuile { 
                 rand() % (MAX_VALUE - MIN_VALUE + 1) + MIN_VALUE, 
                 rand() % (MAX_VALUE - MIN_VALUE + 1) + MIN_VALUE, 
                 rand() % (MAX_VALUE - MIN_VALUE + 1) + MIN_VALUE, 
                 rand() % (MAX_VALUE - MIN_VALUE + 1) + MIN_VALUE 
-            });
+            };
+            sacTuiles.push_back(&tuile);
         }
         plateau.at(longueur / 2).at(hauteur / 2) = piocherTuile();
-}
+    }
 
-const Tuile<unsigned int> DominoCarre::piocherTuile() {
+Tuile<unsigned int>* DominoCarre::piocherTuile() {
     int random = rand() % sacTuiles.size();
-    Tuile<unsigned int> tuile = sacTuiles.at(random);
+    Tuile<unsigned int>* tuile = sacTuiles.at(random);
     sacTuiles.erase(sacTuiles.begin() + random);
     return tuile;
 }
@@ -40,28 +41,29 @@ const Tuile<unsigned int> DominoCarre::piocherTuile() {
 
 }*/
 void DominoCarre::placerTuile(int i, int j, Tuile<unsigned int> tuile , vector<vector<Tuile<unsigned int>>> plateau){
-  if (i > 0) {
-    if (this->plateau [i][j].getValeurNord() != this->plateau[i-1][j].getValeurSud()) {
-      return;
+  
+    if (i > 0) {
+        if (plateau[i][j].getValeurNord() != plateau[i-1][j].getValeurSud()) {
+            return;
+            }
+        }
+    if (i < SIZE - 1) {
+        if (plateau[i][j].getValeurSud() != plateau[i+1][j].getValeurNord()) {
+            return;
+        }
     }
-  }
-  if (i < SIZE - 1) {
-    if (this->plateau[i][j].getValeurSud() != this->plateau[i+1][j].getValeurNord()) {
-      return;
+    if (j > 0) {
+        if (plateau[i][j].getValeurOuest() != plateau[i][j-1].getValeurEst()) {
+            return;
+        }
     }
-  }
-  if (j > 0) {
-    if (this->plateau[i][j].getValeurOuest() != this->plateau[i][j-1].getValeurEst()) {
-      return;
+    if (j < SIZE - 1) {
+        if (plateau[i][j].getValeurEst() != plateau[i][j+1].getValeurOuest()) {
+            return;
+        }
     }
-  }
-  if (j < SIZE - 1) {
-    if (this->plateau[i][j].getValeurEst() != this->plateau[i][j+1].getValeurOuest()) {
-      return;
-    }
-  }
 
-  this->plateau[i][j] = tuile;
+    plateau[i][j] = tuile;
 }
 
 
@@ -73,6 +75,6 @@ const unsigned int DominoCarre::getHauteur() const {
     return hauteur;
 }
 
-const vector<vector<Tuile<unsigned int>>> DominoCarre::getPlateau() const {
+const vector<vector<Tuile<unsigned int>*>> DominoCarre::getPlateau() const {
     return plateau;
 }

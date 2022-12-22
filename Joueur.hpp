@@ -8,7 +8,7 @@
 
 using namespace std;
 
-class Joueur{
+template typename<T> class Joueur {
     private:
         vector<Tuile<unsigned int>> mainJoueur;
         int score;

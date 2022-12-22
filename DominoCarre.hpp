@@ -14,12 +14,12 @@ class DominoCarre {
 
         const unsigned int longueur;
         const unsigned int hauteur;
-        vector<Tuile<unsigned int>> sacTuiles;
-        vector<vector<Tuile<unsigned int>>> plateau;
+        vector<Tuile<unsigned int>*> sacTuiles;
+        vector<vector<Tuile<unsigned int>*>> plateau;
 
     public:
         DominoCarre(const unsigned int longueur, const unsigned int hauteur, const unsigned int taille);
-        const Tuile<unsigned int> piocherTuile();
+        Tuile<unsigned int>* piocherTuile();
         void placerTuile(int x, int y, Tuile<unsigned int> tuile, vector<vector<Tuile<unsigned int>>> plateau);
         void sauvegarderPartie();
         void chargerPartie();
@@ -28,7 +28,7 @@ class DominoCarre {
         void quitter();
         const unsigned int getLongueur() const;
         const unsigned int getHauteur() const;
-        const vector<vector<Tuile<unsigned int>>> getPlateau() const;
+        const vector<vector<Tuile<unsigned int>*>> getPlateau() const;
 };
 
 
