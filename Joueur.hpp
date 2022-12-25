@@ -6,25 +6,18 @@
 #include <stdio.h>
 #include <vector>
 
-using namespace std;
-
-template typename<T> class Joueur {
+template <typename T> class Joueur {
     private:
-        vector<Tuile<unsigned int>> mainJoueur;
+        const std::string nom;
+        const int id;
         int score;
-        string nom;
-        int id;
+        std::vector<Tuile<T>*> mainJoueur;
 
     public:
-        Joueur(string nom);
-        void ajouterTuile(Tuile<unsigned int> tuile);
-        void afficherScore();
-        void afficherNom();
-        void afficherId();
-        void sauvegarderPartie();
-        void afficherAide();
-        void afficherRegles();
-        void quitter();
+        Joueur(const std::string nom): nom { nom }, id { 0 }, score { 0 } {}
+        void ajouterTuile(const Tuile<T>* tuile) {
+            mainJoueur.push_back(tuile);
+        };
 };
 
 #endif

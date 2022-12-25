@@ -2,8 +2,7 @@
 #define _Tuile
 
 #include "Tuile.hpp"
-
-using namespace std;
+#include <iostream>
 
 template <typename T> class Tuile {
     private:
@@ -14,6 +13,9 @@ template <typename T> class Tuile {
 
     public:
         Tuile(const T valeurNord, const T valeurOuest, const T valeurEst, const T valeurSud): valeurNord { valeurNord }, valeurOuest { valeurOuest }, valeurEst { valeurEst }, valeurSud { valeurSud } {}
+        ~Tuile() {
+            std::cout << "Destruction de Tuile." << std::endl;
+        }
 
         const T getValeurNord() const {
             return valeurNord;
@@ -33,18 +35,18 @@ template <typename T> class Tuile {
 
         void tournerGauche() {
             T temp = valeurNord;
-            valeurNord = valeurOuest;
-            valeurOuest = valeurSud;
-            valeurSud = valeurEst;
-            valeurEst = temp;
-        }
-        
-        void tournerDroite() {
-            T temp = valeurNord;
             valeurNord = valeurEst;
             valeurEst = valeurSud;
             valeurSud = valeurOuest;
             valeurOuest = temp;
+        }
+        
+        void tournerDroite() {
+            T temp = valeurNord;
+            valeurNord = valeurOuest;
+            valeurOuest = valeurSud;
+            valeurSud = valeurEst;
+            valeurEst = temp;
         }
 };
 

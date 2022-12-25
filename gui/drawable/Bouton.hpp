@@ -1,9 +1,9 @@
 #ifndef _Bouton
 #define _Bouton
 
+#include <functional>
 #include <iostream>
 #include <SFML/Graphics.hpp>
-#include <string>
 
 class Bouton: public sf::Drawable, public sf::Transformable {
     public:
@@ -12,14 +12,17 @@ class Bouton: public sf::Drawable, public sf::Transformable {
         void setSize(const float width, const float height);
         void setTextColor(const sf::Color color);
         void setRectangleColor(const sf::Color color);
-        bool isClicked(const sf::Event event);
+        void setOnClickListener(const std::function<int()> onClick);
+        const bool isClicked(const float x, const float y) const;
+        const void fireEvent() const;
         virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 
     private:
         static const unsigned int DEFAULT_WIDTH;
-        static const unsigned int DEFAULT_HEIGHT; 
+        static const unsigned int DEFAULT_HEIGHT;
         sf::RectangleShape rectangle;
         sf::Text texte;
+        std::function<int()> onClick;
 };
 
 #endif

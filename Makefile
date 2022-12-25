@@ -1,29 +1,30 @@
 CPP=g++ --std=c++11 -Wall
+BIN=bin/
 
-all : Bouton DominoCarreGUI DominoCarreTuileGUI DominoCarreScreen MenuPrincipal DominoCarre main
-	$(CPP) gui/drawable/Bouton.o gui/drawable/DominoCarreGUI.o gui/drawable/DominoCarreTuileGUI.o gui/screens/MenuPrincipal.o gui/screens/DominoCarreScreen.o DominoCarre.o main.o -o sfml-app -lsfml-graphics -lsfml-window -lsfml-system
-	./sfml-app
+all : $(BIN)Bouton.o $(BIN)DominoCarreGUI.o $(BIN)DominoCarreTuileGUI.o $(BIN)DominoCarreScreen.o $(BIN)MenuPrincipal.o $(BIN)DominoCarre.o $(BIN)main.o
+	$(CPP) $(BIN)Bouton.o $(BIN)DominoCarreGUI.o $(BIN)DominoCarreTuileGUI.o $(BIN)MenuPrincipal.o $(BIN)DominoCarreScreen.o $(BIN)DominoCarre.o $(BIN)main.o -o $(BIN)sfml-app -lsfml-graphics -lsfml-window -lsfml-system
+	./$(BIN)sfml-app
 
-Bouton : gui/drawable/Bouton.o
-	$(CPP) -c gui/drawable/Bouton.cpp
+$(BIN)Bouton.o : gui/drawable/Bouton.cpp
+	$(CPP) -c gui/drawable/Bouton.cpp -o $(BIN)Bouton.o
 
-DominoCarreGUI : gui/drawable/DominoCarreGUI.o
-	$(CPP) -c gui/drawable/DominoCarreGUI.cpp
+$(BIN)DominoCarreGUI.o : gui/drawable/DominoCarreGUI.cpp
+	$(CPP) -c gui/drawable/DominoCarreGUI.cpp -o $(BIN)DominoCarreGUI.o
 
-DominoCarreTuileGUI : gui/drawable/DominoCarreTuileGUI.o
-	$(CPP) -c gui/drawable/DominoCarreTuileGUI.cpp
+$(BIN)DominoCarreTuileGUI.o : gui/drawable/DominoCarreTuileGUI.cpp
+	$(CPP) -c gui/drawable/DominoCarreTuileGUI.cpp -o $(BIN)DominoCarreTuileGUI.o
 
-DominoCarreScreen : gui/screens/DominoCarreScreen.o
-	$(CPP) -c gui/screens/DominoCarreScreen.cpp
+$(BIN)DominoCarreScreen.o : gui/screens/DominoCarreScreen.cpp
+	$(CPP) -c gui/screens/DominoCarreScreen.cpp -o $(BIN)DominoCarreScreen.o
 
-MenuPrincipal : gui/screens/MenuPrincipal.o
-	$(CPP) -c gui/screens/MenuPrincipal.cpp
+$(BIN)MenuPrincipal.o : gui/screens/MenuPrincipal.cpp
+	$(CPP) -c gui/screens/MenuPrincipal.cpp -o $(BIN)MenuPrincipal.o
 
-DominoCarre : DominoCarre.o
-	$(CPP) -c DominoCarre.cpp
+$(BIN)DominoCarre.o : DominoCarre.cpp
+	$(CPP) -c DominoCarre.cpp -o $(BIN)DominoCarre.o
 
-main : main.o
-	$(CPP) -c main.cpp
+$(BIN)main.o : main.cpp
+	$(CPP) -c main.cpp -o $(BIN)main.o
 
 clean :
-	rm *.o gui/drawable/*.o gui/screens/*.o sfml-app
+	rm $(BIN)*.o $(BIN)sfml-app

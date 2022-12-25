@@ -8,17 +8,24 @@
 #include <iostream>
 #include <SFML/Graphics.hpp>
 
-class DominoCarreGUI : public sf::Drawable, public sf::Transformable {
+class DominoCarreGUI: public sf::Drawable, public sf::Transformable {
     public:
-        DominoCarreGUI(DominoCarre* dominoCarre, sf::Font* font);
-        void setSize(const float size);
+        DominoCarreGUI(DominoCarre* dominoCarre, const sf::Font* font);
+        const sf::Vector2u getSize() const;
+        void setSize(const unsigned int x, const unsigned int y);
+        void setSize(const sf::Vector2u size);
+        const bool fireEvent(const sf::Event::MouseButtonEvent event);
         virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 
     private:
         DominoCarre* dominoCarre;
-        sf::Font* font;
-        vector<vector<DominoCarreTuileGUI>> dominoCarreTuilesGui;
+        const sf::Font* font;
+        std::vector<std::vector<DominoCarreTuileGUI*>> dominoCarreTuilesGui;
         Bouton sacTuilesGui;
+        DominoCarreTuileGUI* tuilePioche;
+        sf::Vector2u size;
+
+        const bool onSacTuileClick();
 };
 
 #endif

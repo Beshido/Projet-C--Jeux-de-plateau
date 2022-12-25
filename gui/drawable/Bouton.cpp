@@ -27,13 +27,16 @@ void Bouton::setRectangleColor(const sf::Color color) {
     rectangle.setFillColor(color);
 }
 
-bool Bouton::isClicked(const sf::Event event) {
-    if (event.type != sf::Event::MouseButtonPressed) 
-        return false;
-    return (event.mouseButton.x > getPosition().x 
-        && event.mouseButton.x < getPosition().x + rectangle.getSize().x
-        && event.mouseButton.y > getPosition().y 
-        && event.mouseButton.y < getPosition().y + rectangle.getSize().y);
+void Bouton::setOnClickListener(const std::function<int()> onClick) {
+    this->onClick = onClick;
+}
+
+const bool Bouton::isClicked(const float x, const float y) const {
+    return sf::FloatRect { getPosition(), getSize() }.contains(x, y);
+}
+
+const void Bouton::fireEvent() const {
+    onClick();
 }
 
 void Bouton::draw(sf::RenderTarget& target, sf::RenderStates states) const {

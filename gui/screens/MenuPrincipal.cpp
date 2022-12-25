@@ -1,6 +1,8 @@
 #include "MenuPrincipal.hpp"
 
 int MenuPrincipal::run(sf::RenderWindow &window) {
+    window.setFramerateLimit(30);
+
 	sf::Font font;
     font.loadFromFile("./fonts/SpaceMono-Regular.ttf");
 
@@ -21,17 +23,24 @@ int MenuPrincipal::run(sf::RenderWindow &window) {
     while (window.isOpen()) {
         sf::Event event;
         while (window.pollEvent(event)) {
-            if (event.type == sf::Event::Closed)
-                window.close();
-            if (boutonDomino.isClicked(event)) {
-                std::cout << "Le bouton Domino a été cliqué !" << std::endl;
-                return 1;
+            switch (event.type) {
+                case sf::Event::Closed:
+                    window.close();
+                    break;
+                case sf::Event::MouseButtonPressed:
+                    if (boutonDomino.isClicked(event.mouseButton.x, event.mouseButton.y)) {
+                        std::cout << "Le bouton Domino a été cliqué !" << std::endl;
+                        return 1;
+                    }
+                    else if (boutonTrax.isClicked(event.mouseButton.x, event.mouseButton.y)) {
+                        std::cout << "Le bouton Trax a été cliqué !" << std::endl;
+                        return 2;
+                    }
+                    break;
+                default:
+                    break;
             }
-            if (boutonTrax.isClicked(event)) {
-                std::cout << "Le bouton Trax a été cliqué !" << std::endl;
-            }
-        } 
-
+        }
         window.clear();
         window.draw(background);
         window.draw(boutonDomino);
