@@ -9,8 +9,8 @@
 template <typename T> class Joueur {
     private:
         const std::string nom;
-        const int id;
-        int score;
+        const unsigned int id;
+        unsigned int score;
         std::vector<Tuile<T>*> mainJoueur;
 
     public:
@@ -18,6 +18,15 @@ template <typename T> class Joueur {
         void ajouterTuile(const Tuile<T>* tuile) {
             mainJoueur.push_back(tuile);
         };
+        void concatenateScore(const unsigned int score) {
+            this->score += score;
+        }
+        const std::string getName() const {
+            return nom;
+        }
+        const unsigned int getScore() const {
+            return score;
+        }
 };
 
 #endif

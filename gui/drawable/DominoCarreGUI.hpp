@@ -2,9 +2,10 @@
 #define _DominoCarreGUI
 
 #include "Bouton.hpp"
+#include "DominoCarreJoueurGUI.hpp"
 #include "DominoCarreTuileGUI.hpp"
-#include "../../DominoCarre.hpp"
-#include "../../Tuile.hpp"
+#include "../../logic/DominoCarre.hpp"
+#include "../../logic/Tuile.hpp"
 #include <iostream>
 #include <SFML/Graphics.hpp>
 
@@ -20,10 +21,12 @@ class DominoCarreGUI: public sf::Drawable, public sf::Transformable {
     private:
         DominoCarre* dominoCarre;
         const sf::Font* font;
+        sf::Vector2u size;
+
         std::vector<std::vector<DominoCarreTuileGUI*>> dominoCarreTuilesGui;
+        std::vector<DominoCarreJoueurGUI> joueursGui;
         Bouton sacTuilesGui;
         DominoCarreTuileGUI* tuilePioche;
-        sf::Vector2u size;
 
         const bool onSacTuileClick();
 };

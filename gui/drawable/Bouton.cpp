@@ -15,7 +15,7 @@ const sf::Vector2f Bouton::getSize() const {
 }
 
 void Bouton::setSize(const float width, const float height) {
-    rectangle.setSize(sf::Vector2f(width, height));
+    rectangle.setSize(sf::Vector2f { width, height });
     texte.setCharacterSize(height / 2);
 }
 

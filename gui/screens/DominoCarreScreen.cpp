@@ -1,8 +1,8 @@
 #include "DominoCarreScreen.hpp"
 #include "../drawable/DominoCarreGUI.hpp"
 #include "../drawable/DominoCarreTuileGUI.hpp"
-#include "../../DominoCarre.hpp"
-#include "../../Tuile.hpp"
+#include "../../logic/DominoCarre.hpp"
+#include "../../logic/Tuile.hpp"
 
 int DominoCarreScreen::run(sf::RenderWindow &window) {
     sf::Font font;
@@ -15,12 +15,18 @@ int DominoCarreScreen::run(sf::RenderWindow &window) {
 
 
     DominoCarre dominoCarre { 10, 2 };
+    std::cout << "a" << std::endl;
     DominoCarreGUI dominoCarreGui { &dominoCarre, &font };
+    std::cout << "a" << std::endl;
     dominoCarreGui.setSize(window.getSize().x * 80 / 100, window.getSize().y);
 
+    std::cout << "a" << std::endl;
     Bouton quit = Bouton { "Quitter", &font };
+    std::cout << "a" << std::endl;
     quit.setSize(window.getSize().x * 20 / 100, window.getSize().y * 10 / 100);
+    std::cout << "a" << std::endl;
     quit.setPosition(window.getSize().x * 80 / 100, 0);
+    std::cout << "a" << std::endl;
 
     while (window.isOpen()) {
         sf::Event event;

@@ -5,14 +5,15 @@
 #include <iostream>
 
 template <typename T> class Tuile {
-    private:
+    protected:
         T valeurNord;
         T valeurOuest;
         T valeurEst;
         T valeurSud;
+        unsigned int rotationFactor;
 
     public:
-        Tuile(const T valeurNord, const T valeurOuest, const T valeurEst, const T valeurSud): valeurNord { valeurNord }, valeurOuest { valeurOuest }, valeurEst { valeurEst }, valeurSud { valeurSud } {}
+        Tuile(const T valeurNord, const T valeurOuest, const T valeurEst, const T valeurSud): valeurNord { valeurNord }, valeurOuest { valeurOuest }, valeurEst { valeurEst }, valeurSud { valeurSud }, rotationFactor { 0 } {}
         ~Tuile() {
             std::cout << "Destruction de Tuile." << std::endl;
         }
@@ -39,6 +40,8 @@ template <typename T> class Tuile {
             valeurEst = valeurSud;
             valeurSud = valeurOuest;
             valeurOuest = temp;
+
+            rotationFactor++;
         }
         
         void tournerDroite() {
@@ -47,6 +50,8 @@ template <typename T> class Tuile {
             valeurOuest = valeurSud;
             valeurSud = valeurEst;
             valeurEst = temp;
+
+            rotationFactor--;
         }
 };
 

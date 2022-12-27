@@ -1,6 +1,6 @@
 #include "gui/drawable/Bouton.hpp"
 #include "gui/screens/screens.hpp"
-#include "Tuile.hpp"
+#include "logic/Tuile.hpp"
 #include <iostream>
 #include <SFML/Graphics.hpp>
 #include <string>
