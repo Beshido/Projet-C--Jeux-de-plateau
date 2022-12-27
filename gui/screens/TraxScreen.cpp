@@ -1,8 +1,10 @@
-#include "DominoCarreScreen.hpp"
-#include "../drawable/DominoCarreGUI.hpp"
-#include "../../logic/DominoCarre.hpp"
+#include "TraxScreen.hpp"
+#include "../drawable/Bouton.hpp"
+#include "../drawable/TraxGUI.hpp"
+#include "../../logic/Trax.hpp"
+#include <iostream>
 
-int DominoCarreScreen::run(sf::RenderWindow &window) {
+int TraxScreen::run(sf::RenderWindow &window) {
     sf::Font font;
     font.loadFromFile("./fonts/SpaceMono-Regular.ttf");
 
@@ -12,9 +14,9 @@ int DominoCarreScreen::run(sf::RenderWindow &window) {
     background.setTexture(backgroundTexture);
 
 
-    DominoCarre dominoCarre { 10, 2 };
-    DominoCarreGUI dominoCarreGui { &dominoCarre, &font };
-    dominoCarreGui.setSize(window.getSize().x * 80 / 100, window.getSize().y);
+    Trax dominoCarre { 10, 2 };
+    TraxGUI traxGui { &dominoCarre, &font };
+    TraxGUI.setSize(window.getSize().x * 80 / 100, window.getSize().y);
 
     Bouton quit = Bouton { "Quitter", &font };
     quit.setSize(window.getSize().x * 20 / 100, window.getSize().y * 10 / 100);
@@ -28,11 +30,11 @@ int DominoCarreScreen::run(sf::RenderWindow &window) {
                     window.close();
                     break;
                 case sf::Event::Resized:
-                    dominoCarreGui.setSize(event.size.width * 80 / 100, event.size.height);
+                    traxGui.setSize(event.size.width * 80 / 100, event.size.height);
                     quit.setSize(event.size.width * 20 / 100, event.size.height * 10 / 100);
                     break;
                 case sf::Event::MouseButtonPressed:
-                    dominoCarreGui.fireEvent(event.mouseButton);
+                    traxGui.fireEvent(event.mouseButton);
                     if (quit.isClicked(event.mouseButton.x, event.mouseButton.y)) {
                         std::cout << "Retour au menu principal." << std::endl;
                         return 0;

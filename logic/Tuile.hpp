@@ -1,7 +1,6 @@
 #ifndef _Tuile
 #define _Tuile
 
-#include "Tuile.hpp"
 #include <iostream>
 
 template <typename T> class Tuile {

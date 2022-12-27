@@ -2,7 +2,6 @@
 #define _Plateau
 
 #include "Joueur.hpp"
-#include "Tuile.hpp"
 #include <stdexcept>
 #include <vector>
 
@@ -32,7 +31,7 @@ template <typename T> class Plateau {
                     score += tuilesAdj.at(3)->getValeurSud();
 
                 players.at(currentPlayer)->concatenateScore(score);
-                currentPlayer = currentPlayer >= players.size() - 1 ? 0 : currentPlayer + 1;
+                nextPlayer();
 
                 plateau.at(x).at(y) = tuile;
                 return true;
@@ -62,7 +61,8 @@ template <typename T> class Plateau {
         const std::vector<std::vector<T*>> getPlateau() const { return plateau; }
         const std::vector<Joueur<T>*> getPlayers() const { return players; }
 
-        /* virtual */ const Joueur<T>* getWinner() const;
+        virtual void nextPlayer() = 0;
+        virtual const Joueur<T>* getWinner() const = 0;
 
 
     protected:

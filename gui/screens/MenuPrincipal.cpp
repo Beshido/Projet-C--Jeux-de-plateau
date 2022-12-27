@@ -1,4 +1,6 @@
 #include "MenuPrincipal.hpp"
+#include "../drawable/Bouton.hpp"
+#include <iostream>
 
 int MenuPrincipal::run(sf::RenderWindow &window) {
     window.setFramerateLimit(30);

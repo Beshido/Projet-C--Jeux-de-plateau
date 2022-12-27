@@ -2,7 +2,6 @@
 #define _Bouton
 
 #include <functional>
-#include <iostream>
 #include <SFML/Graphics.hpp>
 
 class Bouton: public sf::Drawable, public sf::Transformable {

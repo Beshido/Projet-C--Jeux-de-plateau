@@ -2,8 +2,6 @@
 #define _DominoCarreTuileGUI
 
 #include "../../logic/DominoCarreTuile.hpp"
-#include <functional>
-#include <iostream>
 #include <SFML/Graphics.hpp>
 
 class DominoCarreTuileGUI : public sf::Drawable, public sf::Transformable {

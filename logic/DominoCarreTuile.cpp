@@ -1,5 +1,4 @@
 #include "DominoCarreTuile.hpp"
-#include "Tuile.hpp"
 #include <algorithm>
 
 const std::string DominoCarreTuile::getValeurNordString() const {
@@ -45,7 +44,6 @@ const std::string DominoCarreTuile::toThreeDigitsString(const unsigned int value
     const size_t length = value >= 100 ? 3 : value >= 10 ? 2 : 1;
     const size_t position = 3 - length;
     valueString.replace(position, length, std::to_string(value));
-    std::cout << "Three digits string: from " << value << " to " << valueString << std::endl;
     return valueString;
 }
 

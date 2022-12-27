@@ -1,9 +1,9 @@
-#ifndef _MenuPrincipal
-#define _MenuPrincipal
+#ifndef _TraxScreen
+#define _TraxScreen
 
 #include "cScreen.hpp"
 
-class MenuPrincipal: public cScreen {
+class TraxScreen: public cScreen {
     public:
         virtual int run(sf::RenderWindow &window);
 };

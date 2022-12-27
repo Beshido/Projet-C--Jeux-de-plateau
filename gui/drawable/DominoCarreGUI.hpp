@@ -5,8 +5,6 @@
 #include "DominoCarreJoueurGUI.hpp"
 #include "DominoCarreTuileGUI.hpp"
 #include "../../logic/DominoCarre.hpp"
-#include "../../logic/Tuile.hpp"
-#include <iostream>
 #include <SFML/Graphics.hpp>
 
 class DominoCarreGUI: public sf::Drawable, public sf::Transformable {

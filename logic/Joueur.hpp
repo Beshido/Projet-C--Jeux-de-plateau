@@ -2,8 +2,6 @@
 #define Joueur_hpp
 
 #include "Tuile.hpp"
-#include <iostream>
-#include <stdio.h>
 #include <vector>
 
 template <typename T> class Joueur {

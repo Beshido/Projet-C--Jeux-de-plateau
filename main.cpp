@@ -22,8 +22,10 @@ int main() {
 	//Screens preparations
 	MenuPrincipal menuPrincipal;
 	DominoCarreScreen dominoCarreGUI;
+    /* TraxScreen traxGUI; */
 	screens.push_back(&menuPrincipal);
 	screens.push_back(&dominoCarreGUI);
+    /* screens.push_back(&traxGUI); */
 
 	//Main loop
 	while (screen >= 0) {

@@ -1,9 +1,9 @@
 #ifndef _DominoCarreJoueurGUI
 #define _DominoCarreJoueurGUI
 
-#include <SFML/Graphics.hpp>
 #include "../../logic/DominoCarreTuile.hpp"
 #include "../../logic/Joueur.hpp"
+#include <SFML/Graphics.hpp>
 
 class DominoCarreJoueurGUI: public sf::Drawable, public sf::Transformable {
     public:

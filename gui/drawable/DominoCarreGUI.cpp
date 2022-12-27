@@ -1,5 +1,4 @@
 #include "DominoCarreGUI.hpp"
-#include "DominoCarreTuileGUI.hpp"
 
 DominoCarreGUI::DominoCarreGUI(DominoCarre* dominoCarre, const sf::Font* font): dominoCarre { dominoCarre }, font { font }, dominoCarreTuilesGui { std::vector<std::vector<DominoCarreTuileGUI*>>{} }, sacTuilesGui { Bouton { "Piocher", font } } {
     for (size_t x = 0; x < dominoCarre->getWidth(); x++) {
@@ -7,7 +6,7 @@ DominoCarreGUI::DominoCarreGUI(DominoCarre* dominoCarre, const sf::Font* font): 
         for (size_t y = 0; y < dominoCarre->getHeight(); y++) {
             DominoCarreTuile* tuile = dominoCarre->getPlateau().at(x).at(y);
             DominoCarreTuileGUI* tuilePtr = nullptr;
-            if (tuile != nullptr) {
+            if (tuile) {
                 tuilePtr = new DominoCarreTuileGUI { tuile, font };
                 tuilePtr->setPosition(x * tuilePtr->getCarre()->getSize().x, y * tuilePtr->getCarre()->getSize().y);
             }
