@@ -1,24 +1,21 @@
 #include "TraxScreen.hpp"
-#include "../drawable/Bouton.hpp"
-#include "../drawable/TraxGUI.hpp"
+#include "../Assets.hpp"
+#include "../drawable/PlayerShape.hpp"
+#include "../drawable/TraxTileShape.hpp"
+#include "../drawable/PlateauShape.hpp"
 #include "../../logic/Trax.hpp"
+#include "../../logic/TraxTile.hpp"
 #include <iostream>
 
-int TraxScreen::run(sf::RenderWindow &window) {
-    sf::Font font;
-    font.loadFromFile("./fonts/SpaceMono-Regular.ttf");
-
-    sf::Texture backgroundTexture;
-    backgroundTexture.loadFromFile("./img/domino_background.jpg");
+int TraxScreen::run(sf::RenderWindow &window) {    
     sf::Sprite background;
-    background.setTexture(backgroundTexture);
+    background.setTexture(Assets::mainBackground);
 
+    Trax trax {};
+    PlateauShape<Trax, TraxTileShape, PlayerShape<Joueur<TraxTile>>> traxGui { &trax };
+    traxGui.setSize(window.getSize().x * 80 / 100, window.getSize().y);
 
-    Trax dominoCarre { 10, 2 };
-    TraxGUI traxGui { &dominoCarre, &font };
-    TraxGUI.setSize(window.getSize().x * 80 / 100, window.getSize().y);
-
-    Bouton quit = Bouton { "Quitter", &font };
+    Bouton quit = Bouton { "Quitter" };
     quit.setSize(window.getSize().x * 20 / 100, window.getSize().y * 10 / 100);
     quit.setPosition(window.getSize().x * 80 / 100, 0);
 
@@ -48,7 +45,7 @@ int TraxScreen::run(sf::RenderWindow &window) {
         window.clear();
         window.draw(background);
         window.draw(quit);
-        window.draw(dominoCarreGui);
+        window.draw(traxGui);
         window.display();
     }
 

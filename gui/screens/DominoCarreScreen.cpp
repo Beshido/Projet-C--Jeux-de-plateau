@@ -1,22 +1,19 @@
 #include "DominoCarreScreen.hpp"
-#include "../drawable/DominoCarreGUI.hpp"
+#include "../Assets.hpp"
+#include "../drawable/DominoCarreJoueurShape.hpp"
+#include "../drawable/DominoCarreTileShape.hpp"
+#include "../drawable/PlateauShape.hpp"
 #include "../../logic/DominoCarre.hpp"
 
 int DominoCarreScreen::run(sf::RenderWindow &window) {
-    sf::Font font;
-    font.loadFromFile("./fonts/SpaceMono-Regular.ttf");
-
-    sf::Texture backgroundTexture;
-    backgroundTexture.loadFromFile("./img/domino_background.jpg");
     sf::Sprite background;
-    background.setTexture(backgroundTexture);
-
+    background.setTexture(Assets::plateauBackground);
 
     DominoCarre dominoCarre { 10, 2 };
-    DominoCarreGUI dominoCarreGui { &dominoCarre, &font };
+    PlateauShape<DominoCarre, DominoCarreTileShape, DominoCarreJoueurShape> dominoCarreGui { &dominoCarre };
     dominoCarreGui.setSize(window.getSize().x * 80 / 100, window.getSize().y);
 
-    Bouton quit = Bouton { "Quitter", &font };
+    Bouton quit = Bouton { "Quitter" };
     quit.setSize(window.getSize().x * 20 / 100, window.getSize().y * 10 / 100);
     quit.setPosition(window.getSize().x * 80 / 100, 0);
 

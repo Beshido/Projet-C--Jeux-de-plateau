@@ -1,19 +1,19 @@
 #ifndef Joueur_hpp
 #define Joueur_hpp
 
-#include "Tuile.hpp"
+#include "Tile.hpp"
 #include <vector>
 
-template <typename T> class Joueur {
+template <typename P> class Joueur {
     private:
         const std::string nom;
         const unsigned int id;
         unsigned int score;
-        std::vector<Tuile<T>*> mainJoueur;
+        std::vector<Tile<P>*> mainJoueur;
 
     public:
         Joueur(const std::string nom): nom { nom }, id { 0 }, score { 0 } {}
-        void ajouterTuile(const Tuile<T>* tuile) {
+        void ajouterTuile(const Tile<P>* tuile) {
             mainJoueur.push_back(tuile);
         };
         void concatenateScore(const unsigned int score) {

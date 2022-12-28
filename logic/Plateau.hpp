@@ -5,22 +5,22 @@
 #include <stdexcept>
 #include <vector>
 
-template <typename T> class Plateau {
+template <typename P> class Plateau {
     public:
-        T* drawTile() {
+        P* drawTile() {
             if (bag.size() < 0) 
                 return nullptr;
 
             size_t random = rand() % bag.size();
-            T* tuile = bag.at(random);
+            P* tuile = bag.at(random);
             bag.erase(bag.begin() + random);
             return tuile;
         }
 
-        const bool placeTile(T* tuile, const size_t x, const size_t y) {
+        const bool placeTile(P* tuile, const size_t x, const size_t y) {
             if (isPlayable(tuile, x, y)) {
-                unsigned int score = 0;
-                const std::vector<const T*> tuilesAdj = getAdjacentTiles(x, y);
+                /* unsigned int score = 0;
+                const std::vector<const P*> tuilesAdj = getAdjacentTiles(x, y);
                 if (tuilesAdj.at(0)) 
                     score += tuilesAdj.at(0)->getValeurNord();
                 if (tuilesAdj.at(1)) 
@@ -30,7 +30,7 @@ template <typename T> class Plateau {
                 if (tuilesAdj.at(3)) 
                     score += tuilesAdj.at(3)->getValeurSud();
 
-                players.at(currentPlayer)->concatenateScore(score);
+                players.at(currentPlayer)->concatenateScore(score); */
                 nextPlayer();
 
                 plateau.at(x).at(y) = tuile;
@@ -39,7 +39,7 @@ template <typename T> class Plateau {
             return false;
         }
 
-        const bool isPlayable(const T* tile) const {
+        const bool isPlayable(const P* tile) const {
             for (size_t i = 0; i < plateau.size(); i++) {
                 for (size_t j = 0; j < plateau.at(i).size(); j++) {
                     if (plateau.at(i).at(j)) {
@@ -57,25 +57,25 @@ template <typename T> class Plateau {
         }
         
         const size_t getWidth() const { return plateau.size(); }
-        const size_t getHeight() const { try { return plateau.at(0).size(); } catch (const std::out_of_range& e) { return 0; } }
-        const std::vector<std::vector<T*>> getPlateau() const { return plateau; }
-        const std::vector<Joueur<T>*> getPlayers() const { return players; }
+        const size_t getHeight() const { try { return plateau.at(0).size(); } catch (const std::out_of_range& e) { return 0; } catch (...) { return 0; } }
+        std::vector<std::vector<P*>> getPlateau() const { return plateau; }
+        const std::vector<Joueur<P>*> getPlayers() const { return players; }
 
         virtual void nextPlayer() = 0;
-        virtual const Joueur<T>* getWinner() const = 0;
-
+        virtual const Joueur<P>* getWinner() const = 0;
+        virtual const bool isFinished() const = 0;
 
     protected:
-        std::vector<std::vector<T*>> plateau;
-        std::vector<T*> bag;
-        std::vector<Joueur<T>*> players;
+        std::vector<std::vector<P*>> plateau;
+        std::vector<P*> bag;
+        std::vector<Joueur<P>*> players;
         size_t currentPlayer;
 
-        const bool isPlayable(const T* tuile, const size_t x, const size_t y) const {
+        const bool isPlayable(const P* tuile, const size_t x, const size_t y) const {
             if (plateau.at(x).at(y)) return false;
 
-            const std::vector<const T*> tuilesAdj = getAdjacentTiles(x, y);
-            if (tuilesAdj == std::vector<const T*> { 4, nullptr }) {
+            const std::vector<const P*> tuilesAdj = getAdjacentTiles(x, y);
+            if (tuilesAdj == std::vector<const P*> { 4, nullptr }) {
                 return false;
             }
 
@@ -86,8 +86,8 @@ template <typename T> class Plateau {
                 ((tuilesAdj.at(3) && tuilesAdj.at(3)->getValeurSud() == tuile->getValeurSud()) || !tuilesAdj.at(3));
         }
 
-        const std::vector<const T*> getAdjacentTiles(const size_t x, const size_t y) const {
-            std::vector<const T*> adjacentTiles { 4, nullptr };
+        const std::vector<const P*> getAdjacentTiles(const size_t x, const size_t y) const {
+            std::vector<const P*> adjacentTiles { 4, nullptr };
             if (y > 0) adjacentTiles.at(0) = plateau.at(x).at(y - 1);
             if (x > 0) adjacentTiles.at(1) = plateau.at(x - 1).at(y);
             if (x < plateau.size() - 1) adjacentTiles.at(2) = plateau.at(x + 1).at(y);

@@ -1,12 +1,13 @@
 #ifndef _Bouton
 #define _Bouton
 
+#include "../Assets.hpp"
 #include <functional>
 #include <SFML/Graphics.hpp>
 
 class Bouton: public sf::Drawable, public sf::Transformable {
     public:
-        Bouton(const std::string label, const sf::Font* font);
+        Bouton(const std::string label);
         const sf::Vector2f getSize() const;
         void setSize(const float width, const float height);
         void setTextColor(const sf::Color color);
@@ -20,7 +21,7 @@ class Bouton: public sf::Drawable, public sf::Transformable {
         static const unsigned int DEFAULT_WIDTH;
         static const unsigned int DEFAULT_HEIGHT;
         sf::RectangleShape rectangle;
-        sf::Text texte;
+        sf::Text text;
         std::function<int()> onClick;
 };
 

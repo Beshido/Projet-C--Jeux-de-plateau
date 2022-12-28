@@ -1,22 +1,18 @@
 #include "MenuPrincipal.hpp"
+#include "../Assets.hpp"
 #include "../drawable/Bouton.hpp"
 #include <iostream>
 
 int MenuPrincipal::run(sf::RenderWindow &window) {
     window.setFramerateLimit(30);
 
-	sf::Font font;
-    font.loadFromFile("./fonts/SpaceMono-Regular.ttf");
-
-    sf::Texture backgroundTexture;
-    backgroundTexture.loadFromFile("./img/fleurs.png");
     sf::Sprite background;
-    background.setTexture(backgroundTexture);
+    background.setTexture(Assets::mainBackground);
 
-    Bouton boutonDomino { "Domino carre", &font };
+    Bouton boutonDomino { "Domino carre" };
     boutonDomino.setPosition(70.f, 70.f);
     boutonDomino.setSize(300.f, 70.f);
-    Bouton boutonTrax { "Trax", &font };
+    Bouton boutonTrax { "Trax" };
     boutonTrax.setPosition(70.f, 200.f);
     boutonTrax.setSize(300.f, 70.f);
     boutonTrax.setTextColor(sf::Color::Black);

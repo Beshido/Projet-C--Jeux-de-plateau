@@ -1,8 +1,8 @@
-#include "TraxTuile.hpp"
+#include "TraxTile.hpp"
 
-TraxTuile::TraxTuile(): Tuile { TraxCouleur::Black, TraxCouleur::White, TraxCouleur::White, TraxCouleur::Black } {}
+TraxTile::TraxTile(): Tile { TraxCouleur::Black, TraxCouleur::White, TraxCouleur::White, TraxCouleur::Black } {}
 
-void TraxTuile::flip() {
+void TraxTile::flip() {
     rotationFactor = 0;
 
     if (!flipped) {

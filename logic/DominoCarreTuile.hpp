@@ -1,11 +1,11 @@
 #ifndef _DominoCarreTuile
 #define _DominoCarreTuile
 
-#include "Tuile.hpp"
+#include "Tile.hpp"
 
-class DominoCarreTuile: public Tuile<unsigned int> {
+class DominoCarreTuile: public Tile<unsigned int> {
     public:
-        using Tuile<unsigned int>::Tuile;
+        using Tile<unsigned int>::Tile;
         const std::string getValeurNordString() const;
         const std::string getValeurOuestString() const;
         const std::string getValeurEstString() const;

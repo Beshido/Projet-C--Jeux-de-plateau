@@ -1,6 +1,7 @@
+#include "gui/Assets.hpp"
 #include "gui/drawable/Bouton.hpp"
 #include "gui/screens/screens.hpp"
-#include "logic/Tuile.hpp"
+#include "logic/Tile.hpp"
 #include <iostream>
 #include <SFML/Graphics.hpp>
 #include <string>
@@ -10,6 +11,11 @@ const unsigned int WINDOW_WIDTH = 1280;
 const unsigned int WINDOW_HEIGHT = 720;
 
 int main() {
+    if (!Assets::initializeAssets()) {
+        return EXIT_FAILURE;
+    }
+    std::cout << "Assets chargés avec succès." << std::endl;
+
 	std::vector<cScreen*> screens;
 	int screen = 0;
 
@@ -22,14 +28,14 @@ int main() {
 	//Screens preparations
 	MenuPrincipal menuPrincipal;
 	DominoCarreScreen dominoCarreGUI;
-    /* TraxScreen traxGUI; */
+    TraxScreen traxGUI;
 	screens.push_back(&menuPrincipal);
 	screens.push_back(&dominoCarreGUI);
-    /* screens.push_back(&traxGUI); */
+    screens.push_back(&traxGUI);
 
 	//Main loop
 	while (screen >= 0) {
-		screen = screens[screen]->run(window);
+		screen = screens.at(screen)->run(window);
 	}
 
 	return EXIT_SUCCESS;

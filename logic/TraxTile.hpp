@@ -1,13 +1,13 @@
 #ifndef _TraxTuile
 #define _TraxTuile
 
-#include "Tuile.hpp"
+#include "Tile.hpp"
 
 enum class TraxCouleur { Black, White };
 
-class TraxTuile : public Tuile<TraxCouleur> {
+class TraxTile : public Tile<TraxCouleur> {
     public:
-        TraxTuile();
+        TraxTile();
         void flip();
 
     private:
