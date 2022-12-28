@@ -21,6 +21,24 @@ Trax::Trax(const size_t taille, const size_t nombreJoueurs) {
     currentPlayer = 0;
 }
 
+const bool Trax::isFinished() const {
+    return bag.size() == 0;
+}
+
+void Trax::nextPlayer() {
+    currentPlayer = currentPlayer >= players.size() - 1 ? 0 : currentPlayer + 1;
+}
+
+/*const Joueur<TraxTuile>* Trax::getWinner() const {
+    Joueur<TraxTuile>* winner = players.at(0);
+    for (size_t i = 1; i < players.size(); i++) {
+        if (players.at(i)->getScore() > winner->getScore()) {
+            winner = players.at(i);
+        }
+    }
+    return winner;
+}*/
+
 //Implement the forced play rule of Trax here
 void Trax::forcedPlay() {
     for (size_t i = 0; i < players.size(); i++) {
