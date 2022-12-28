@@ -26,6 +26,21 @@ const bool DominoCarre::isFinished() const {
     return bag.size() == 0;
 }
 
+void DominoCarre::updateScore(const size_t x, const size_t y) {
+     unsigned int score = 0;
+    const std::vector<const DominoCarreTuile*> tuilesAdj = getAdjacentTiles(x, y);
+    if (tuilesAdj.at(0)) 
+        score += tuilesAdj.at(0)->getValeurNord();
+    if (tuilesAdj.at(1)) 
+        score += tuilesAdj.at(1)->getValeurOuest();
+    if (tuilesAdj.at(2)) 
+        score += tuilesAdj.at(2)->getValeurEst();
+    if (tuilesAdj.at(3)) 
+        score += tuilesAdj.at(3)->getValeurSud();
+
+    players.at(currentPlayer)->concatenateScore(score);
+}
+
 void DominoCarre::nextPlayer() {
     currentPlayer = currentPlayer >= players.size() - 1 ? 0 : currentPlayer + 1;
 }

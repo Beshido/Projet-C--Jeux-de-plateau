@@ -13,6 +13,10 @@ const bool Trax::isFinished() const {
 void Trax::nextPlayer() {
 
 }
+
+void Trax::updateScore(const size_t x, const size_t y) {
+
+}
     
 const Joueur<TraxTile>* Trax::getWinner() const {
     return nullptr;

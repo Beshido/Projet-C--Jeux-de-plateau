@@ -17,7 +17,7 @@ class DominoCarreTuile: public Tile<unsigned int> {
         const unsigned int reverseDigits(const unsigned int value) const;
         const std::string toThreeDigitsString(const unsigned int value) const;
         const std::string toVerticalString(const std::string text) const;
-        bool IsSurrounded() const {
+        bool IsSurrounded() const;
 };
 
 #endif

@@ -19,21 +19,9 @@ template <typename P> class Plateau {
 
         const bool placeTile(P* tuile, const size_t x, const size_t y) {
             if (isPlayable(tuile, x, y)) {
-                /* unsigned int score = 0;
-                const std::vector<const P*> tuilesAdj = getAdjacentTiles(x, y);
-                if (tuilesAdj.at(0)) 
-                    score += tuilesAdj.at(0)->getValeurNord();
-                if (tuilesAdj.at(1)) 
-                    score += tuilesAdj.at(1)->getValeurOuest();
-                if (tuilesAdj.at(2)) 
-                    score += tuilesAdj.at(2)->getValeurEst();
-                if (tuilesAdj.at(3)) 
-                    score += tuilesAdj.at(3)->getValeurSud();
-
-                players.at(currentPlayer)->concatenateScore(score); */
-                nextPlayer();
-
                 plateau.at(x).at(y) = tuile;
+                nextPlayer();
+                updateScore(x, y);
                 return true;
             }
             return false;
@@ -62,6 +50,7 @@ template <typename P> class Plateau {
         const std::vector<Joueur<P>*> getPlayers() const { return players; }
 
         virtual void nextPlayer() = 0;
+        virtual void updateScore(const size_t x, const size_t y) = 0;
         virtual const Joueur<P>* getWinner() const = 0;
         virtual const bool isFinished() const = 0;
 
