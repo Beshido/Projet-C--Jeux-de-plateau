@@ -30,13 +30,13 @@ void DominoCarre::updateScore(const size_t x, const size_t y) {
      unsigned int score = 0;
     const std::vector<const DominoCarreTuile*> tuilesAdj = getAdjacentTiles(x, y);
     if (tuilesAdj.at(0)) 
-        score += tuilesAdj.at(0)->getValeurNord();
+        score += sumDigits(tuilesAdj.at(0)->getValeurNord());
     if (tuilesAdj.at(1)) 
-        score += tuilesAdj.at(1)->getValeurOuest();
+        score += sumDigits(tuilesAdj.at(1)->getValeurOuest());
     if (tuilesAdj.at(2)) 
-        score += tuilesAdj.at(2)->getValeurEst();
+        score += sumDigits(tuilesAdj.at(2)->getValeurEst());
     if (tuilesAdj.at(3)) 
-        score += tuilesAdj.at(3)->getValeurSud();
+        score += sumDigits(tuilesAdj.at(3)->getValeurSud());
 
     players.at(currentPlayer)->concatenateScore(score);
 }
@@ -53,4 +53,13 @@ const Joueur<DominoCarreTuile>* DominoCarre::getWinner() const {
         }
     }
     return winner;
+}
+
+const int DominoCarre::sumDigits(unsigned int n) const {
+    int sum = 0;
+    while (n > 0) {
+        sum += n % 10;
+        n /= 10;
+    }
+    return sum;
 }

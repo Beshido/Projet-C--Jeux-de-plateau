@@ -17,6 +17,8 @@ class DominoCarre: public Plateau<DominoCarreTuile> {
         static const unsigned int MIN_VALUE;
         static const unsigned int MAX_VALUE;
         static const unsigned int SIZE;
+
+        const int sumDigits(const unsigned int n) const;
 };
 
 #endif
