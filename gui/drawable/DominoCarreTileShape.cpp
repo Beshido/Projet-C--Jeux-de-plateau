@@ -22,6 +22,8 @@ DominoCarreTileShape::DominoCarreTileShape(DominoCarreTuile* dominoCarre): TileS
     update();
 }
 
+DominoCarreTileShape::DominoCarreTileShape(DominoCarreTileShape* dominoCarreTileShape): DominoCarreTileShape { dominoCarreTileShape->getTile() } {}
+
 DominoCarreTileShape::~DominoCarreTileShape() {
     std::cout << "Destruction de DominoCarreTileShape." << std::endl;
 }

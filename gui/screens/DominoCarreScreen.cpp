@@ -1,7 +1,7 @@
 #include "DominoCarreScreen.hpp"
 #include "../Assets.hpp"
-#include "../drawable/PlayerShape.hpp"
 #include "../drawable/DominoCarreTileShape.hpp"
+#include "../drawable/DominoCarrePlateauShape.hpp"
 #include "../drawable/PlateauShape.hpp"
 #include "../../logic/DominoCarre.hpp"
 
@@ -10,7 +10,7 @@ int DominoCarreScreen::run(sf::RenderWindow &window) {
     background.setTexture(Assets::plateauBackground);
 
     DominoCarre dominoCarre { 10, 2 };
-    PlateauShape<DominoCarre, DominoCarreTileShape, PlayerShape<Joueur<DominoCarreTuile>>> dominoCarreGui { &dominoCarre };
+    DominoCarrePlateauShape dominoCarreGui { &dominoCarre };
     dominoCarreGui.setSize(window.getSize().x * 80 / 100, window.getSize().y);
 
     Bouton quit = Bouton { "Quitter" };

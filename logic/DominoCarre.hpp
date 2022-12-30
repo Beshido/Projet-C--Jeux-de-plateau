@@ -7,10 +7,11 @@
 
 class DominoCarre: public Plateau<DominoCarreTuile> {
     public:
-        DominoCarre(const size_t taille, const size_t nombreJoueurs);
+        DominoCarre(const size_t size, const size_t amountPlayers);
+        virtual const bool isPlayable(const DominoCarreTuile* tuile, const size_t x, const size_t y) const;
         virtual const bool isFinished() const;
         virtual void updateScore(const size_t x, const size_t y);
-        virtual void nextPlayer();
+        virtual const bool isNextPlayerTurn() const;
         virtual const Joueur<DominoCarreTuile>* getWinner() const;
 
     private:

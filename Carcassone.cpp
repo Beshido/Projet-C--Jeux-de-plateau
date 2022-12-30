@@ -27,7 +27,7 @@ Carcassone::Carcassone(const size_t taille, const size_t nombreJoueurs) {
 const bool Carcassone::isFinished() const {
     return last_tile_placed_ || remaining_tiles_ == 0;
 }
-void Carcassone::nextPlayer() {
+void Carcassone::isNextPlayerTurn() {
     currentPlayer = currentPlayer >= players.size() - 1 ? 0 : currentPlayer + 1;
 }
 Joueur* DetermineWinner() {

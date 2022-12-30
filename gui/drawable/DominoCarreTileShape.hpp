@@ -9,6 +9,7 @@
 class DominoCarreTileShape: public TileShape<DominoCarreTuile> {
     public:
         DominoCarreTileShape(DominoCarreTuile* dominoCarre);
+        DominoCarreTileShape(DominoCarreTileShape* dominoCarreTileShape);
         ~DominoCarreTileShape();
         void setSize(const float size);
 

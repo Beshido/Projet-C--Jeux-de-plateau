@@ -7,7 +7,7 @@ class Carcassone : public Plateau<CarcassoneTuile> {
     public:
         Carcassone(const size_t taille, const size_t nombreJoueurs);
         bool isFinished() const;
-        virtual void nextPlayer();
+        virtual void isNextPlayerTurn();
         virtual const Joueur<CarcassoneTuile>* getWinner() const;
         Joueur* DetermineWinner();
 

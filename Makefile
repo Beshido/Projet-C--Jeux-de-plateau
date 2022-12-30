@@ -1,8 +1,8 @@
 CPP=g++ --std=c++11 -Wall
 BIN=bin/
 
-all : $(BIN)Bouton.o $(BIN)DominoCarreTileShape.o $(BIN)TraxTileShape.o $(BIN)DominoCarreScreen.o $(BIN)MenuPrincipal.o $(BIN)TraxScreen.o $(BIN)Assets.o $(BIN)DominoCarre.o $(BIN)DominoCarreTuile.o $(BIN)Trax.o $(BIN)TraxTile.o $(BIN)main.o
-	$(CPP) $(BIN)Bouton.o $(BIN)DominoCarreTileShape.o $(BIN)TraxTileShape.o $(BIN)MenuPrincipal.o $(BIN)TraxScreen.o $(BIN)Assets.o $(BIN)DominoCarreScreen.o $(BIN)DominoCarre.o $(BIN)DominoCarreTuile.o $(BIN)Trax.o $(BIN)TraxTile.o $(BIN)main.o -o $(BIN)sfml-app -lsfml-graphics -lsfml-window -lsfml-system
+all : $(BIN)Bouton.o $(BIN)DominoCarreTileShape.o $(BIN)DominoCarrePlateauShape.o $(BIN)TraxPlateauShape.o $(BIN)TraxTileShape.o $(BIN)DominoCarreScreen.o $(BIN)MenuPrincipal.o $(BIN)TraxScreen.o $(BIN)Assets.o $(BIN)DominoCarre.o $(BIN)DominoCarreTuile.o $(BIN)Trax.o $(BIN)TraxTile.o $(BIN)main.o
+	$(CPP) $(BIN)Bouton.o $(BIN)DominoCarreTileShape.o $(BIN)DominoCarrePlateauShape.o $(BIN)TraxPlateauShape.o $(BIN)TraxTileShape.o $(BIN)MenuPrincipal.o $(BIN)TraxScreen.o $(BIN)Assets.o $(BIN)DominoCarreScreen.o $(BIN)DominoCarre.o $(BIN)DominoCarreTuile.o $(BIN)Trax.o $(BIN)TraxTile.o $(BIN)main.o -o $(BIN)sfml-app -lsfml-graphics -lsfml-window -lsfml-system
 	./$(BIN)sfml-app
 
 $(BIN)Bouton.o : gui/drawable/Bouton.cpp
@@ -10,6 +10,12 @@ $(BIN)Bouton.o : gui/drawable/Bouton.cpp
 
 $(BIN)DominoCarreTileShape.o : gui/drawable/DominoCarreTileShape.cpp
 	$(CPP) -c gui/drawable/DominoCarreTileShape.cpp -o $(BIN)DominoCarreTileShape.o
+
+$(BIN)DominoCarrePlateauShape.o : gui/drawable/DominoCarrePlateauShape.cpp
+	$(CPP) -c gui/drawable/DominoCarrePlateauShape.cpp -o $(BIN)DominoCarrePlateauShape.o
+
+$(BIN)TraxPlateauShape.o : gui/drawable/TraxPlateauShape.cpp
+	$(CPP) -c gui/drawable/TraxPlateauShape.cpp -o $(BIN)TraxPlateauShape.o
 
 $(BIN)TraxTileShape.o : gui/drawable/TraxTileShape.cpp
 	$(CPP) -c gui/drawable/TraxTileShape.cpp -o $(BIN)TraxTileShape.o

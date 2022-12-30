@@ -24,7 +24,7 @@ template <typename P> class Tile {
             valeurSud = valeurOuest;
             valeurOuest = temp;
 
-            rotationFactor++;
+            rotationFactor--;
         }
         
         void tournerDroite() {
@@ -34,7 +34,7 @@ template <typename P> class Tile {
             valeurSud = valeurEst;
             valeurEst = temp;
 
-            rotationFactor--;
+            rotationFactor++;
         }
 
         const P getValeurNord() const { return valeurNord; }
@@ -43,5 +43,10 @@ template <typename P> class Tile {
         const P getValeurSud() const { return valeurSud; }
         const int getRotationFactor() const { return rotationFactor; }
 };
+
+template<typename P> inline std::ostream& operator<<(std::ostream& os, const Tile<P>& tile) {
+    os << tile.getValeurNord() << ", " << tile.getValeurEst() << ", " << tile.getValeurEst() << ", " << tile.getValeurSud();
+    return os;
+}
 
 #endif

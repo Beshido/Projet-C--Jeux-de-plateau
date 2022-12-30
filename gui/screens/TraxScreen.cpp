@@ -1,6 +1,7 @@
 #include "TraxScreen.hpp"
 #include "../Assets.hpp"
 #include "../drawable/PlayerShape.hpp"
+#include "../drawable/TraxPlateauShape.hpp"
 #include "../drawable/TraxTileShape.hpp"
 #include "../drawable/PlateauShape.hpp"
 #include "../../logic/Trax.hpp"
@@ -9,10 +10,10 @@
 
 int TraxScreen::run(sf::RenderWindow &window) {    
     sf::Sprite background;
-    background.setTexture(Assets::mainBackground);
+    background.setTexture(Assets::plateauBackground);
 
     Trax trax {};
-    PlateauShape<Trax, TraxTileShape, PlayerShape<Joueur<TraxTile>>> traxGui { &trax };
+    TraxPlateauShape traxGui { &trax };
     traxGui.setSize(window.getSize().x * 80 / 100, window.getSize().y);
 
     Bouton quit = Bouton { "Quitter" };

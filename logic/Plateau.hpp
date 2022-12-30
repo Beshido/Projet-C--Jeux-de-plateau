@@ -7,6 +7,15 @@
 
 template <typename P> class Plateau {
     public:
+        Plateau(const size_t size, const size_t amountPlayers): plateau { std::vector<std::vector<P*>> { size, std::vector<P*> { size, nullptr } } } {
+            for (size_t i = 0; i < amountPlayers; i++) {
+                std::string playerName = "Joueur ";
+                playerName.append(std::to_string(i + 1));
+                players.push_back(new Joueur<P> { playerName });
+            }
+            currentPlayer = 0;
+        }
+
         P* drawTile() {
             if (bag.size() < 0) 
                 return nullptr;
@@ -20,7 +29,9 @@ template <typename P> class Plateau {
         const bool placeTile(P* tuile, const size_t x, const size_t y) {
             if (isPlayable(tuile, x, y)) {
                 plateau.at(x).at(y) = tuile;
-                nextPlayer();
+                if (isNextPlayerTurn()) {
+                    currentPlayer = currentPlayer >= players.size() - 1 ? 0 : currentPlayer + 1;
+                };
                 updateScore(x, y);
                 return true;
             }
@@ -48,8 +59,10 @@ template <typename P> class Plateau {
         const size_t getHeight() const { try { return plateau.at(0).size(); } catch (const std::out_of_range& e) { return 0; } catch (...) { return 0; } }
         std::vector<std::vector<P*>> getPlateau() const { return plateau; }
         const std::vector<Joueur<P>*> getPlayers() const { return players; }
+        const size_t getCurrentPlayerIndex() const { return currentPlayer; }
 
-        virtual void nextPlayer() = 0;
+        virtual const bool isPlayable(const P* tuile, const size_t x, const size_t y) const = 0;
+        virtual const bool isNextPlayerTurn() const = 0;
         virtual void updateScore(const size_t x, const size_t y) = 0;
         virtual const Joueur<P>* getWinner() const = 0;
         virtual const bool isFinished() const = 0;
@@ -60,7 +73,7 @@ template <typename P> class Plateau {
         std::vector<Joueur<P>*> players;
         size_t currentPlayer;
 
-        const bool isPlayable(const P* tuile, const size_t x, const size_t y) const {
+        const bool isAdjacentValuesEqual(const P* tuile, const size_t x, const size_t y) const {
             if (plateau.at(x).at(y)) return false;
 
             const std::vector<const P*> tuilesAdj = getAdjacentTiles(x, y);
@@ -69,10 +82,10 @@ template <typename P> class Plateau {
             }
 
             return !plateau.at(x).at(y) &&
-                ((tuilesAdj.at(0) && tuilesAdj.at(0)->getValeurNord() == tuile->getValeurNord()) || !tuilesAdj.at(0)) &&
-                ((tuilesAdj.at(1) && tuilesAdj.at(1)->getValeurOuest() == tuile->getValeurOuest()) || !tuilesAdj.at(1)) &&
-                ((tuilesAdj.at(2) && tuilesAdj.at(2)->getValeurEst() == tuile->getValeurEst()) || !tuilesAdj.at(2)) &&
-                ((tuilesAdj.at(3) && tuilesAdj.at(3)->getValeurSud() == tuile->getValeurSud()) || !tuilesAdj.at(3));
+                ((tuilesAdj.at(0) && tuilesAdj.at(0)->getValeurSud() == tuile->getValeurNord()) || !tuilesAdj.at(0)) &&
+                ((tuilesAdj.at(1) && tuilesAdj.at(1)->getValeurEst() == tuile->getValeurOuest()) || !tuilesAdj.at(1)) &&
+                ((tuilesAdj.at(2) && tuilesAdj.at(2)->getValeurOuest() == tuile->getValeurEst()) || !tuilesAdj.at(2)) &&
+                ((tuilesAdj.at(3) && tuilesAdj.at(3)->getValeurNord() == tuile->getValeurSud()) || !tuilesAdj.at(3));
         }
 
         const std::vector<const P*> getAdjacentTiles(const size_t x, const size_t y) const {
@@ -84,5 +97,16 @@ template <typename P> class Plateau {
             return adjacentTiles;
         }
 };
+
+template<typename P> inline std::ostream& operator<<(std::ostream& os, const Plateau<P>& plateau) {
+    for (size_t i = 0; i < plateau.getWidth(); i++) {
+        for (size_t j = 0; j < plateau.getHeight(); j++) {
+            if (plateau.getPlateau().at(i).at(j)) {
+                os << i << "." << j << ": " << *(plateau.getPlateau().at(i).at(j)) << std::endl;
+            }
+        }
+    }
+    return os;
+}
 
 #endif
