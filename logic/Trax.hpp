@@ -20,7 +20,7 @@ class Trax: public Plateau<TraxTile> {
 
         const bool isForcedMoveAvailable() const;
         const bool isForcedMove(const size_t x, const size_t y) const;
-        const bool isFinishedRecursive(const TraxCouleur color, const TraxTile* sourceTile, const TraxTile* previousTile, const size_t x, const size_t y) const;
+        const bool isFinishedRecursive(const TraxCouleur color, const size_t sourceX, const size_t sourceY, const TraxTile* previousTile, const size_t x, const size_t y, const bool first = false) const;
 };
 
 #endif

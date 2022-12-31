@@ -17,22 +17,41 @@ const bool Trax::isPlayable(const TraxTile* tuile, const size_t x, const size_t 
 }
 
 const bool Trax::isFinished() const {
-    /* for (size_t x = 0; x < getWidth(); x++) {
+    for (size_t x = 0; x < getWidth(); x++) {
         for (size_t y = 0; y < getHeight(); y++) {
-            std::vector<const TraxTile *> adjacentTiles = getAdjacentTiles(x, y);
-            if ()
+            if (isFinishedRecursive(TraxCouleur::Black, x, y, plateau.at(x).at(y), x, y, true) || isFinishedRecursive(TraxCouleur::White, x, y, plateau.at(x).at(y), x, y, true)) {
+                return true;
+            }
         }
-    } */
+    }
     return false;
 }
 
-/* const bool Trax::isFinishedRecursive(const TraxCouleur color, const TraxTile* sourceTile, const TraxTile* previousTile, const size_t x, const size_t y) const {
-    const std::vector<const TraxTile*> adjacentTiles = getAdjacentTiles(x, y);
-    if (adjacentTiles.at(0) && adjacentTiles.at(0) != previousTile) {
-
-        if (adjacentTiles.at(0)->getValeurSud())
+const bool Trax::isFinishedRecursive(const TraxCouleur color, const size_t sourceX, const size_t sourceY, const TraxTile* previousTile, const size_t x, const size_t y, const bool first) const {
+    if (!plateau.at(x).at(y)) {
+        return false;
     }
-} */
+
+    if ((!first && (sourceX == x && sourceY == y)) || ((sourceX == 0 && x == getWidth() - 1) || (sourceX == getWidth() - 1 && x == 0) || (sourceY == 0 && y == getHeight() - 1) || (sourceY == getHeight() - 1 && y == 0))) {
+        return true;
+    }
+
+    const std::vector<const TraxTile*> adjacentTiles = getAdjacentTiles(x, y);
+    if (adjacentTiles.at(0) && adjacentTiles.at(0)->getValeurSud() == color && adjacentTiles.at(0) != previousTile) {
+        return isFinishedRecursive(color, sourceX, sourceY, plateau.at(x).at(y), x, y - 1);
+    }
+    else if (adjacentTiles.at(1) && adjacentTiles.at(1)->getValeurEst() == color && adjacentTiles.at(1) != previousTile) {
+        return isFinishedRecursive(color, sourceX, sourceY, plateau.at(x).at(y), x - 1, y);
+    }
+    else if (adjacentTiles.at(2) && adjacentTiles.at(2)->getValeurOuest() == color && adjacentTiles.at(2) != previousTile) {
+        return isFinishedRecursive(color, sourceX, sourceY, plateau.at(x).at(y), x + 1, y);
+    }
+    else if (adjacentTiles.at(3) && adjacentTiles.at(3)->getValeurNord() == color && adjacentTiles.at(3) != previousTile) {
+        return isFinishedRecursive(color, sourceX, sourceY, plateau.at(x).at(y), x, y + 1);
+    }
+
+    return false;
+}
 
 const bool Trax::isNextPlayerTurn() const {
     return !isForcedMoveAvailable();

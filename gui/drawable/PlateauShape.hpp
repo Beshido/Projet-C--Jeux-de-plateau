@@ -90,7 +90,6 @@ template <typename P, typename TileShape, typename PlayerShape> class PlateauSha
                     std::cout << "La tuile n'est pas jouable à cet emplacement." << std::endl;
                 }
             }
-            std::cout << *plateau << std::endl;
             return true;
         }
 
