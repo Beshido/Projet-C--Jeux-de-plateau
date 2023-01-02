@@ -1,8 +1,8 @@
 #include "Carcassone.hpp"
-#include "CarcassoneTuile.hpp"
+#include "CarcassoneTile.hpp"
 #include "Joueur.hpp"
 #include "Plateau.hpp"
-#include "Tuile.hpp"
+#include "Tile.hpp"
 #include <random>
 #include <vector>
 

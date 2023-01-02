@@ -43,13 +43,7 @@ const bool DominoCarre::isNextPlayerTurn() const {
 }
 
 const Joueur<DominoCarreTuile>* DominoCarre::getWinner() const {
-    Joueur<DominoCarreTuile>* winner = players.at(0);
-    for (size_t i = 1; i < players.size(); i++) {
-        if (players.at(i)->getScore() > winner->getScore()) {
-            winner = players.at(i);
-        }
-    }
-    return winner;
+    return getHighestScorePlayer();
 }
 
 const int DominoCarre::sumDigits(unsigned int n) const {

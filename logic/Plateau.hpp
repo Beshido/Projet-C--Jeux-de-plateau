@@ -16,6 +16,21 @@ template <typename P> class Plateau {
             currentPlayer = 0;
         }
 
+        ~Plateau() {
+            for (size_t i = 0; i < plateau.size(); i++) {
+                for (size_t j = 0; j < plateau.at(i).size(); j++) {
+                    delete plateau.at(i).at(j);
+                }
+            }
+            for (size_t i = 0; i < bag.size(); i++) {
+                delete bag.at(i);
+            }
+            for (size_t i = 0; i < players.size(); i++) {
+                delete players.at(i);
+            }
+            std::cout << "Plateau détruit." << std::endl;
+        }
+
         P* drawTile() {
             if (bag.size() < 0) 
                 return nullptr;
@@ -64,7 +79,9 @@ template <typename P> class Plateau {
         virtual const bool isPlayable(const P* tuile, const size_t x, const size_t y) const = 0;
         virtual const bool isNextPlayerTurn() const = 0;
         virtual void updateScore(const size_t x, const size_t y) = 0;
-        virtual const Joueur<P>* getWinner() const = 0;
+        const Joueur<P>* getWinner() const {
+            return getHighestScorePlayer();
+        };
         virtual const bool isFinished() const = 0;
 
     protected:
@@ -95,6 +112,16 @@ template <typename P> class Plateau {
             if (x < plateau.size() - 1) adjacentTiles.at(2) = plateau.at(x + 1).at(y);
             if (y < plateau.at(x).size() - 1) adjacentTiles.at(3) = plateau.at(x).at(y + 1);
             return adjacentTiles;
+        }
+
+        const Joueur<P>* getHighestScorePlayer() const {
+            Joueur<P>* winner = players.at(0);
+            for (size_t i = 1; i < players.size(); i++) {
+                if (players.at(i)->getScore() > winner->getScore()) {
+                    winner = players.at(i);
+                }
+            }
+            return winner;
         }
 };
 

@@ -19,7 +19,12 @@ const bool Trax::isPlayable(const TraxTile* tuile, const size_t x, const size_t 
 const bool Trax::isFinished() const {
     for (size_t x = 0; x < getWidth(); x++) {
         for (size_t y = 0; y < getHeight(); y++) {
-            if (isFinishedRecursive(TraxCouleur::Black, x, y, plateau.at(x).at(y), x, y, true) || isFinishedRecursive(TraxCouleur::White, x, y, plateau.at(x).at(y), x, y, true)) {
+            if (isFinishedRecursive(TraxCouleur::Black, x, y, plateau.at(x).at(y), x, y, true)) {
+                players.at(0)->concatenateScore(1);
+                return true;
+            }
+            else if (isFinishedRecursive(TraxCouleur::White, x, y, plateau.at(x).at(y), x, y, true)) {
+                players.at(1)->concatenateScore(1);
                 return true;
             }
         }

@@ -27,6 +27,11 @@ template <typename P, typename TileShape, typename PlayerShape> class PlateauSha
             }
             playersShape.at(plateau->getCurrentPlayerIndex()).active();
         }
+        
+        ~PlateauShape() {
+            delete plateau;
+            delete drawnTile;
+        }
 
         const sf::Vector2u getSize() const {
             return size;
