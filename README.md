@@ -1,6 +1,22 @@
 # Projet-C++ Jeux de plateau
 
-Commandes à lancer pour faire fonctionner le programme sur WSL2:
-```
-export DISPLAY=$(awk '/nameserver / {print $2; exit}' /etc/resolv.conf 2>/dev/null):0 && export LIBGL_ALWAYS_INDIRECT=1
-```
+## Description
+
+Ce projet est un jeu de plateau en C++.
+
+## Installation
+
+* make
+
+## Fonctionnalités
+
+*   Affichage du plateau
+*   Affichage des joueurs et des scores 
+*   Bouton pour tirer une tuile
+*   Zone du Plateau Cliquable pour placer une tuile
+
+## Auteurs 
+
+*   Alban LE JEUNE
+*   Billal SEDDIKI
+
