@@ -58,6 +58,7 @@ class CarcassoneTile: public Tile<CarcassoneType> {
         static CarcassoneTile* createCarcassoneTile(const CarcassoneTileContent tile);
 
         const bool placePartisan(Partisan partisan);
+        const bool hasPartisan(Partisan partisan);
         const CarcassoneTileContent getType() const;
         
     private:
