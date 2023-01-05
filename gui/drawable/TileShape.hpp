@@ -16,7 +16,7 @@ template <typename P> class TileShape: public sf::Drawable, public sf::Transform
         }
         
         ~TileShape() {
-            delete tile;
+            /* delete tile; */
             std::cout << "TileShape supprimé." << std::endl;    
         }
 

@@ -2,21 +2,21 @@
 #define _Carcassone
 
 #include "CarcassoneTile.hpp"
+#include "Plateau.hpp"
 
-class Carcassone : public Plateau<CarcassoneTuile> {
+class Carcassone : public Plateau<CarcassoneTile> {
     public:
-        Carcassone(const size_t taille, const size_t nombreJoueurs);
+        Carcassone();
+        const bool isSurrounded(const size_t x, const size_t y) const;
+        const bool isCompleted(const size_t x, const size_t y) const;
+        
         virtual const bool isFinished() const;
-        virtual void isNextPlayerTurn();
-        virtual const Joueur<CarcassoneTuile>* getWinner() const;
-        Joueur<CarcassoneTuile>* DetermineWinner();
+        virtual const bool isNextPlayerTurn() const;
+        virtual const bool isPlayable(const CarcassoneTile* tuile, const size_t x, const size_t y) const;
+        virtual void updateScore(const size_t x, const size_t y);
 
     private:
-        static const unsigned int SIZE;
-        static const unsigned int MIN_VALUE;
-        bool last_tile_placed_;  // Whether the last tile has been placed
-        int remaining_tiles_;  // The number of tiles remaining to be played
-        const unsigned int kMaxScore = 25;  // The maximum score a player can have
+        static const size_t SIZE;
 };
 
 #endif

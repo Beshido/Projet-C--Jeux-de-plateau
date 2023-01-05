@@ -10,3 +10,7 @@ void TraxPlateauShape::onDrawnTileClick(const sf::Event::MouseButtonEvent event)
         drawnTile->update();
     }
 }
+
+void TraxPlateauShape::onBoardTileClick(const sf::Event::MouseButtonEvent event) {
+    placeTileIfPossible(event);
+}

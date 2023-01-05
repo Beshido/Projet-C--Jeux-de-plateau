@@ -1,6 +1,6 @@
 #include "DominoCarreJoueurShape.hpp"
 
-DominoCarreJoueurShape::DominoCarreJoueurShape(Joueur<DominoCarreTuile>* joueur): PlayerShape<Joueur<DominoCarreTuile>> { joueur } {
+DominoCarreJoueurShape::DominoCarreJoueurShape(Joueur<DominoCarreTile>* joueur): PlayerShape<Joueur<DominoCarreTile>> { joueur } {
     score.setFont(Assets::font);
     score.setFillColor(sf::Color::Black);
     update();
@@ -11,7 +11,7 @@ void DominoCarreJoueurShape::update() {
 }
 
 void DominoCarreJoueurShape::setSize(const float x, const float y) {
-    PlayerShape<Joueur<DominoCarreTuile>>::setSize(x, y);
+    PlayerShape<Joueur<DominoCarreTile>>::setSize(x, y);
 
     score.setCharacterSize(y / 2);
     score.setPosition(0, name.getLocalBounds().top + name.getLocalBounds().height);

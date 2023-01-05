@@ -1,5 +1,5 @@
-#ifndef _TraxTuile
-#define _TraxTuile
+#ifndef _TraxTile
+#define _TraxTile
 
 #include "Tile.hpp"
 

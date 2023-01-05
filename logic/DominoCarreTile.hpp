@@ -1,9 +1,9 @@
-#ifndef _DominoCarreTuile
-#define _DominoCarreTuile
+#ifndef _DominoCarreTile
+#define _DominoCarreTile
 
 #include "Tile.hpp"
 
-class DominoCarreTuile: public Tile<unsigned int> {
+class DominoCarreTile: public Tile<unsigned int> {
     public:
         using Tile<unsigned int>::Tile;
         const std::string getValeurNordString() const;

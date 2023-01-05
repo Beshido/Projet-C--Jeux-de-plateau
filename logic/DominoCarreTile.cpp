@@ -1,23 +1,23 @@
-#include "DominoCarreTuile.hpp"
+#include "DominoCarreTile.hpp"
 #include <algorithm>
 
-const std::string DominoCarreTuile::getValeurNordString() const {
+const std::string DominoCarreTile::getValeurNordString() const {
     return toThreeDigitsString(valeurNord);
 }
 
-const std::string DominoCarreTuile::getValeurOuestString() const {
+const std::string DominoCarreTile::getValeurOuestString() const {
     return toVerticalString(toThreeDigitsString(valeurOuest));
 }
 
-const std::string DominoCarreTuile::getValeurEstString() const {
+const std::string DominoCarreTile::getValeurEstString() const {
     return toVerticalString(toThreeDigitsString(valeurEst));
 }
 
-const std::string DominoCarreTuile::getValeurSudString() const {
+const std::string DominoCarreTile::getValeurSudString() const {
     return toThreeDigitsString(valeurSud);
 }
 
-void DominoCarreTuile::tournerGauche() {
+void DominoCarreTile::tournerGauche() {
     const unsigned int temp = valeurNord;
     valeurNord = reverseDigits(valeurEst);
     valeurEst = valeurSud;
@@ -25,7 +25,7 @@ void DominoCarreTuile::tournerGauche() {
     valeurOuest = temp;
 }
 
-void DominoCarreTuile::tournerDroite() {
+void DominoCarreTile::tournerDroite() {
     unsigned int temp = valeurNord;
     valeurNord = reverseDigits(valeurOuest);
     valeurOuest = valeurSud;
@@ -33,13 +33,13 @@ void DominoCarreTuile::tournerDroite() {
     valeurEst = temp;
 }
 
-const unsigned int DominoCarreTuile::reverseDigits(const unsigned int value) const {
+const unsigned int DominoCarreTile::reverseDigits(const unsigned int value) const {
     std::string valueString = toThreeDigitsString(value);
     std::reverse(valueString.begin(), valueString.end());
     return std::stoi(valueString);
 }
 
-const std::string DominoCarreTuile::toThreeDigitsString(const unsigned int value) const {
+const std::string DominoCarreTile::toThreeDigitsString(const unsigned int value) const {
     std::string valueString = "000";
     const size_t length = value >= 100 ? 3 : value >= 10 ? 2 : 1;
     const size_t position = 3 - length;
@@ -47,7 +47,7 @@ const std::string DominoCarreTuile::toThreeDigitsString(const unsigned int value
     return valueString;
 }
 
-const std::string DominoCarreTuile::toVerticalString(const std::string value) const {
+const std::string DominoCarreTile::toVerticalString(const std::string value) const {
     std::string valueString = value;
     for (size_t i = 1; i < valueString.length(); i += 2)
         valueString.insert(i, "\n");

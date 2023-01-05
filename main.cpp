@@ -29,9 +29,11 @@ int main() {
 	MenuPrincipal menuPrincipal;
 	DominoCarreScreen dominoCarreGUI;
     TraxScreen traxGUI;
+    CarcassoneScreen carcassoneGUI;
 	screens.push_back(&menuPrincipal);
 	screens.push_back(&dominoCarreGUI);
     screens.push_back(&traxGUI);
+    screens.push_back(&carcassoneGUI);
 
 	//Main loop
 	while (screen >= 0) {

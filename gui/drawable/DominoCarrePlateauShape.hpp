@@ -6,12 +6,13 @@
 #include "PlayerShape.hpp"
 #include "../../logic/DominoCarre.hpp"
 
-class DominoCarrePlateauShape: public PlateauShape<DominoCarre, DominoCarreTileShape, PlayerShape<Joueur<DominoCarreTuile>>> {
+class DominoCarrePlateauShape: public PlateauShape<DominoCarre, DominoCarreTileShape, PlayerShape<Joueur<DominoCarreTile>>> {
     public:
         DominoCarrePlateauShape(DominoCarre* dominoCarre);
 
     protected:
         virtual void onDrawnTileClick(const sf::Event::MouseButtonEvent event);
+        virtual void onBoardTileClick(const sf::Event::MouseButtonEvent event);
 
 };
 

@@ -3,12 +3,12 @@
 
 #include "TileShape.hpp"
 #include "../Assets.hpp"
-#include "../../logic/DominoCarreTuile.hpp"
+#include "../../logic/DominoCarreTile.hpp"
 #include <SFML/Graphics.hpp>
 
-class DominoCarreTileShape: public TileShape<DominoCarreTuile> {
+class DominoCarreTileShape: public TileShape<DominoCarreTile> {
     public:
-        DominoCarreTileShape(DominoCarreTuile* dominoCarre);
+        DominoCarreTileShape(DominoCarreTile* dominoCarre);
         DominoCarreTileShape(DominoCarreTileShape* dominoCarreTileShape);
         ~DominoCarreTileShape();
         void setSize(const float size);

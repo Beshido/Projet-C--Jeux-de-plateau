@@ -1,23 +1,85 @@
 #include "CarcassoneTile.hpp"
 
-CarcassoneTuile::CarcassoneTuile() : Tuile<CarcassoneType> { CarcassoneType::Grassland, CarcassoneType::Grassland, CarcassoneType::Grassland, CarcassoneType::Grassland } {}
-CarcassoneTuile::CarcassoneTuile(CarcassoneType type) : Tuile<CarcassoneType> { type, type, type, type } {}
-CarcassoneTuile::CarcassoneTuile(CarcassoneType typeNord, CarcassoneType typeOuest, CarcassoneType typeEst, CarcassoneType typeSud) : Tuile<CarcassoneType> { typeNord, typeOuest, typeEst, typeSud } {}
+CarcassoneTile::CarcassoneTile(const CarcassoneTileContent type, const CarcassoneType typeNord, const CarcassoneType typeOuest, const CarcassoneType typeEst, const CarcassoneType typeSud): Tile<CarcassoneType> { typeNord, typeOuest, typeEst, typeSud }, type { type } {}
 
-bool IsSurrounded() const {
-    // Check if there are tiles in all four directions
-    return north_ != nullptr && south_ != nullptr &&
-           east_ != nullptr && west_ != nullptr;
-  }
-TileType GetType() const {
-    return type_;
-  }
-bool HasFollower() const {
-    return has_follower_;
-  }
-  // Returns true if the tile is part of a completed area, false otherwise
-bool IsCompleted() const {
-    // Check if the tile is a city or road and if it is fully surrounded by other tiles
-    return (type_ == CarcassoneType::City || type_ == CarcassoneTuile::Road) &&
-           IsSurrounded();
-  }
+CarcassoneTile* CarcassoneTile::createCarcassoneTile(const CarcassoneTileContent tile) {
+    CarcassoneTile* carcassoneTile;
+    switch (tile) {
+        case CarcassoneTileContent::GrassCrossroadGrassCrossroad:
+            carcassoneTile = new CarcassoneTile { CarcassoneTileContent::GrassCrossroadGrassCrossroad, CarcassoneType::Grass, CarcassoneType::Crossroad, CarcassoneType::Grass, CarcassoneType::Crossroad }; break;
+        case CarcassoneTileContent::CityCrossroadGrassCrossroad1:
+            carcassoneTile = new CarcassoneTile { CarcassoneTileContent::CityCrossroadGrassCrossroad1, CarcassoneType::City, CarcassoneType::Crossroad, CarcassoneType::Grass, CarcassoneType::Crossroad }; break;
+        case CarcassoneTileContent::CityCityCrossroadCrossroad1:
+            carcassoneTile = new CarcassoneTile { CarcassoneTileContent::CityCityCrossroadCrossroad1, CarcassoneType::City, CarcassoneType::City, CarcassoneType::Crossroad, CarcassoneType::Crossroad }; break;
+        case CarcassoneTileContent::CityCityCityCrossroad1:
+            carcassoneTile = new CarcassoneTile { CarcassoneTileContent::CityCityCityCrossroad1, CarcassoneType::City, CarcassoneType::City, CarcassoneType::City, CarcassoneType::Crossroad }; break;
+        case CarcassoneTileContent::CityCityCityGrass1:
+            carcassoneTile = new CarcassoneTile { CarcassoneTileContent::CityCityCityGrass1, CarcassoneType::City, CarcassoneType::City, CarcassoneType::City, CarcassoneType::Grass }; break;
+        case CarcassoneTileContent::CityCityCrossroadCrossroad2:
+            carcassoneTile = new CarcassoneTile { CarcassoneTileContent::CityCityCrossroadCrossroad2, CarcassoneType::City, CarcassoneType::City, CarcassoneType::Crossroad, CarcassoneType::Crossroad }; break;
+        case CarcassoneTileContent::CityCrossroadCrossroadCrossroad:
+            carcassoneTile = new CarcassoneTile { CarcassoneTileContent::CityCrossroadCrossroadCrossroad, CarcassoneType::City, CarcassoneType::Crossroad, CarcassoneType::Crossroad, CarcassoneType::Crossroad }; break;
+        case CarcassoneTileContent::CrossroadGrassGrassCrossroad:
+            carcassoneTile = new CarcassoneTile { CarcassoneTileContent::CrossroadGrassGrassCrossroad, CarcassoneType::Crossroad, CarcassoneType::Grass, CarcassoneType::Grass, CarcassoneType::Crossroad }; break;
+        case CarcassoneTileContent::GrassCrossroadCrossroadCrossroad:
+            carcassoneTile = new CarcassoneTile { CarcassoneTileContent::GrassCrossroadCrossroadCrossroad, CarcassoneType::Grass, CarcassoneType::Crossroad, CarcassoneType::Crossroad, CarcassoneType::Crossroad }; break;
+        case CarcassoneTileContent::CityGrassGrassGrass:
+            carcassoneTile = new CarcassoneTile { CarcassoneTileContent::CityGrassGrassGrass, CarcassoneType::City, CarcassoneType::Grass, CarcassoneType::Grass, CarcassoneType::Grass }; break;
+        case CarcassoneTileContent::CityGrassCityGrass:
+            carcassoneTile = new CarcassoneTile { CarcassoneTileContent::CityGrassCityGrass, CarcassoneType::City, CarcassoneType::Grass, CarcassoneType::City, CarcassoneType::Grass }; break;
+        case CarcassoneTileContent::CityCityCityGrass2:
+            carcassoneTile = new CarcassoneTile { CarcassoneTileContent::CityCityCityGrass2, CarcassoneType::City, CarcassoneType::City, CarcassoneType::City, CarcassoneType::Grass }; break;
+        case CarcassoneTileContent::GrassGrassGrassGrassMonastery:
+            carcassoneTile = new CarcassoneTile { CarcassoneTileContent::GrassGrassGrassGrassMonastery, CarcassoneType::Grass, CarcassoneType::Grass, CarcassoneType::Grass, CarcassoneType::Grass }; break;
+        case CarcassoneTileContent::GrassGrassGrassCrossroad:
+            carcassoneTile = new CarcassoneTile { CarcassoneTileContent::GrassGrassGrassCrossroad, CarcassoneType::Grass, CarcassoneType::Grass, CarcassoneType::Grass, CarcassoneType::Crossroad }; break;
+        case CarcassoneTileContent::CityCityGrassGrass1:
+            carcassoneTile = new CarcassoneTile { CarcassoneTileContent::CityCityGrassGrass1, CarcassoneType::City, CarcassoneType::City, CarcassoneType::Grass, CarcassoneType::Grass }; break;
+        case CarcassoneTileContent::GrassCityCityGrass1:
+            carcassoneTile = new CarcassoneTile { CarcassoneTileContent::GrassCityCityGrass1, CarcassoneType::Grass, CarcassoneType::City, CarcassoneType::City, CarcassoneType::Grass }; break;
+        case CarcassoneTileContent::CityCrossroadCrossroadGrass:
+            carcassoneTile = new CarcassoneTile { CarcassoneTileContent::CityCrossroadCrossroadGrass, CarcassoneType::City, CarcassoneType::Crossroad, CarcassoneType::Crossroad, CarcassoneType::Grass }; break;
+        case CarcassoneTileContent::CityCrossroadGrassCrossroad2:
+            carcassoneTile = new CarcassoneTile { CarcassoneTileContent::CityCrossroadGrassCrossroad2, CarcassoneType::City, CarcassoneType::Crossroad, CarcassoneType::Grass, CarcassoneType::Crossroad }; break;
+        case CarcassoneTileContent::GrassCityCityGrass2:
+            carcassoneTile = new CarcassoneTile { CarcassoneTileContent::GrassCityCityGrass2, CarcassoneType::Grass, CarcassoneType::City, CarcassoneType::City, CarcassoneType::Grass }; break;
+        case CarcassoneTileContent::CityCityCityCrossroad2:
+            carcassoneTile = new CarcassoneTile { CarcassoneTileContent::CityCityCityCrossroad2, CarcassoneType::City, CarcassoneType::City, CarcassoneType::City, CarcassoneType::Crossroad }; break;
+        case CarcassoneTileContent::CityCityCityCity:
+            carcassoneTile = new CarcassoneTile { CarcassoneTileContent::CityCityCityCity, CarcassoneType::City, CarcassoneType::City, CarcassoneType::City, CarcassoneType::City }; break;
+        case CarcassoneTileContent::CrossroadCrossroadCrossroadCrossroad:
+            carcassoneTile = new CarcassoneTile { CarcassoneTileContent::CrossroadCrossroadCrossroadCrossroad, CarcassoneType::Crossroad, CarcassoneType::Crossroad, CarcassoneType::Crossroad, CarcassoneType::Crossroad }; break;
+        case CarcassoneTileContent::CityCityGrassGrass2:
+            carcassoneTile = new CarcassoneTile { CarcassoneTileContent::CityCityGrassGrass2, CarcassoneType::City, CarcassoneType::City, CarcassoneType::Grass, CarcassoneType::Grass }; break;
+        case CarcassoneTileContent::GrassCityCityGrass3:
+            carcassoneTile = new CarcassoneTile { CarcassoneTileContent::GrassCityCityGrass3, CarcassoneType::Grass, CarcassoneType::City, CarcassoneType::City, CarcassoneType::Grass }; break;
+    }
+    return carcassoneTile;
+}
+
+const bool CarcassoneTile::placePartisan(Partisan partisan) {
+    switch (partisan) {
+        case Partisan::Knight:
+            if (valeurNord != CarcassoneType::Castle || valeurOuest != CarcassoneType::Castle || valeurEst != CarcassoneType::Castle || valeurSud != CarcassoneType::Castle) {
+                return false;
+            }
+        case Partisan::Thief:
+            if (valeurNord != CarcassoneType::Crossroad || valeurOuest != CarcassoneType::Crossroad || valeurEst != CarcassoneType::Crossroad || valeurSud != CarcassoneType::Crossroad) {
+                return false;
+            }
+        case Partisan::Peasant:
+            if (valeurNord != CarcassoneType::Grass || valeurOuest != CarcassoneType::Grass || valeurEst != CarcassoneType::Grass || valeurSud != CarcassoneType::Grass) {
+                return false;
+            }
+        case Partisan::Monk:
+            if (valeurNord != CarcassoneType::Monastery || valeurOuest != CarcassoneType::Monastery || valeurEst != CarcassoneType::Monastery || valeurSud != CarcassoneType::Monastery) {
+                return false;
+            }
+    }
+    this->partisan = &partisan;
+    return true;
+}
+
+const CarcassoneTileContent CarcassoneTile::getType() const {
+    return type;
+}

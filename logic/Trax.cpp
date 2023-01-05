@@ -66,10 +66,6 @@ void Trax::updateScore(const size_t x, const size_t y) {
     firstPlay = false;
 }
     
-const Joueur<TraxTile>* Trax::getWinner() const {
-    return nullptr;
-}
-
 const bool Trax::isForcedMoveAvailable() const {
     for (size_t x = 0; x < getWidth(); x++) { // vérification si un coup forcé est possible. si oui, le joueur actuel continue de jouer.
         for (size_t y = 0; y < getHeight(); y++) {

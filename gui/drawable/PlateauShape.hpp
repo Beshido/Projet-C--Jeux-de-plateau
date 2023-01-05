@@ -29,8 +29,9 @@ template <typename P, typename TileShape, typename PlayerShape> class PlateauSha
         }
         
         ~PlateauShape() {
-            delete plateau;
-            delete drawnTile;
+            /* delete plateau;
+            delete drawnTile; */
+            std::cout << "PlateauShape supprimé." << std::endl;
         }
 
         const sf::Vector2u getSize() const {
@@ -71,29 +72,9 @@ template <typename P, typename TileShape, typename PlayerShape> class PlateauSha
             }
             else if (drawnTile && drawnTile->isClicked(event.x, event.y)) {
                 onDrawnTileClick(event);
-                
             }
             else if (drawnTile && (unsigned int) event.x < size.y) {
-                size_t x = event.x / tileSize;
-                size_t y = event.y / tileSize;
-                if (plateau->placeTile(drawnTile->getTile(), x, y)) {
-                    tilesShape.at(x).at(y) = drawnTile;
-                    tilesShape.at(x).at(y)->setSize(tileSize);
-                    tilesShape.at(x).at(y)->setPosition(x * tileSize, y * tileSize);
-                    drawnTile = nullptr;
-                    for (size_t i = 0; i < playersShape.size(); i++) {
-                        playersShape.at(i).inactive();
-                        playersShape.at(i).update();
-                    }
-                    if (plateau->isFinished()) {
-                        std::cout << "La partie est finie." << std::endl;
-                    }
-                    playersShape.at(plateau->getCurrentPlayerIndex()).active();
-
-                }
-                else {
-                    std::cout << "La tuile n'est pas jouable à cet emplacement." << std::endl;
-                }
+                onBoardTileClick(event);
             }
             return true;
         }
@@ -153,6 +134,31 @@ template <typename P, typename TileShape, typename PlayerShape> class PlateauSha
                     break;
             }
         }
+
+        void placeTileIfPossible(const sf::Event::MouseButtonEvent event) {
+            size_t x = event.x / tileSize;
+            size_t y = event.y / tileSize;
+            if (plateau->placeTile(drawnTile->getTile(), x, y)) {
+                tilesShape.at(x).at(y) = drawnTile;
+                tilesShape.at(x).at(y)->setSize(tileSize);
+                tilesShape.at(x).at(y)->setPosition(x * tileSize, y * tileSize);
+                drawnTile = nullptr;
+                for (size_t i = 0; i < playersShape.size(); i++) {
+                    playersShape.at(i).inactive();
+                    playersShape.at(i).update();
+                }
+                if (plateau->isFinished()) {
+                    std::cout << "La partie est finie." << std::endl;
+                }
+                playersShape.at(plateau->getCurrentPlayerIndex()).active();
+
+            }
+            else {
+                std::cout << "La tuile n'est pas jouable à cet emplacement." << std::endl;
+            }
+        }
+
+        virtual void onBoardTileClick(const sf::Event::MouseButtonEvent event) = 0;
 
         virtual void onDrawnTileClick(const sf::Event::MouseButtonEvent event) = 0;
 };

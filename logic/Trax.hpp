@@ -12,7 +12,6 @@ class Trax: public Plateau<TraxTile> {
         virtual const bool isFinished() const;
         virtual const bool isNextPlayerTurn() const;
         virtual void updateScore(const size_t x, const size_t y);
-        virtual const Joueur<TraxTile>* getWinner() const;
 
     private:
         static const unsigned int SIZE;

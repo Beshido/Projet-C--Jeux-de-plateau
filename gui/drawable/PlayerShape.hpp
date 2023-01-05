@@ -21,7 +21,6 @@ template <typename Player> class PlayerShape: public sf::Drawable, public sf::Tr
         }
         
         ~PlayerShape() {
-            delete player;
             std::cout << "PlayerShape supprimé." << std::endl;
         }
 

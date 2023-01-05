@@ -6,16 +6,16 @@ const unsigned int DominoCarre::MIN_VALUE = 100;
 const unsigned int DominoCarre::MAX_VALUE = 999;
 const unsigned int DominoCarre::SIZE = 8;
 
-DominoCarre::DominoCarre(const size_t size, const size_t amountPlayers): Plateau<DominoCarreTuile> { size, amountPlayers } {
+DominoCarre::DominoCarre(const size_t size, const size_t amountPlayers): Plateau<DominoCarreTile> { size, amountPlayers } {
     srand(time(NULL));
     for (size_t i = 0; i < size; i++) {
-        DominoCarreTuile* tuile = new DominoCarreTuile { 100, 100, 100, 100 };
+        DominoCarreTile* tuile = new DominoCarreTile { 100, 100, 100, 100 };
         bag.push_back(tuile);
     }
     plateau.at(SIZE / 2).at(SIZE / 2) = drawTile();
 }
 
-const bool DominoCarre::isPlayable(const DominoCarreTuile* tuile, const size_t x, const size_t y) const {
+const bool DominoCarre::isPlayable(const DominoCarreTile* tuile, const size_t x, const size_t y) const {
     return isAdjacentValuesEqual(tuile, x, y);
 }
 
@@ -25,7 +25,7 @@ const bool DominoCarre::isFinished() const {
 
 void DominoCarre::updateScore(const size_t x, const size_t y) {
      unsigned int score = 0;
-    const std::vector<const DominoCarreTuile*> tuilesAdj = getAdjacentTiles(x, y);
+    const std::vector<const DominoCarreTile*> tuilesAdj = getAdjacentTiles(x, y);
     if (tuilesAdj.at(0)) 
         score += sumDigits(tuilesAdj.at(0)->getValeurNord());
     if (tuilesAdj.at(1)) 
@@ -40,10 +40,6 @@ void DominoCarre::updateScore(const size_t x, const size_t y) {
 
 const bool DominoCarre::isNextPlayerTurn() const {
     return true;
-}
-
-const Joueur<DominoCarreTuile>* DominoCarre::getWinner() const {
-    return getHighestScorePlayer();
 }
 
 const int DominoCarre::sumDigits(unsigned int n) const {

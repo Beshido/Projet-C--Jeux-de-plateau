@@ -6,25 +6,63 @@
 enum class CarcassoneType {
     City,
     Road,
-    Field,
+    Grass,
     Monastery,
     Grassland,
-    Crossroads,
+    Crossroad,
     Cloister,
     Castle,
     River,
     Count
 };
 
-class CarcassoneTuile : public Tile<CarcassoneType> {
+enum class CarcassoneTileContent {
+    GrassCrossroadGrassCrossroad, // 9
+    CityCrossroadGrassCrossroad1, // 3
+    CityCityCrossroadCrossroad1, // 2
+    CityCityCityCrossroad1, // 1
+    CityCityCityGrass1, // 1
+    CityCityCrossroadCrossroad2, // 3
+    CityCrossroadCrossroadCrossroad, // 3
+    CrossroadGrassGrassCrossroad, // 8
+    GrassCrossroadCrossroadCrossroad, // 4
+    
+    CityGrassGrassGrass, // 5
+    CityGrassCityGrass, // 2
+    CityCityCityGrass2, // 3
+    GrassGrassGrassGrassMonastery, // 4
+    GrassGrassGrassCrossroad, // 2
+    CityCityGrassGrass1, // 3
+    GrassCityCityGrass1, // 2
+    CityCrossroadCrossroadGrass, // 4
+    CityCrossroadGrassCrossroad2, // 3
+    
+    GrassCityCityGrass2, // 1
+    CityCityCityCrossroad2, // 2
+    CityCityCityCity, // 1
+    CrossroadCrossroadCrossroadCrossroad, // 1
+    CityCityGrassGrass2, // 2
+    GrassCityCityGrass3 // 3
+};
+
+enum class Partisan {
+    Knight,
+    Thief,
+    Peasant,
+    Monk
+};
+
+class CarcassoneTile: public Tile<CarcassoneType> {
     public:
-        CarcassoneTuile();
-        CarcassoneTuile(CarcassoneType type);
-        CarcassoneTuile(CarcassoneType typeNord, CarcassoneType typeOuest, CarcassoneType typeEst, CarcassoneType typeSud);
+        CarcassoneTile(const CarcassoneTileContent type, const CarcassoneType typeNord, const CarcassoneType typeOuest, const CarcassoneType typeEst, const CarcassoneType typeSud);
+        static CarcassoneTile* createCarcassoneTile(const CarcassoneTileContent tile);
+
+        const bool placePartisan(Partisan partisan);
+        const CarcassoneTileContent getType() const;
+        
     private:
-        bool IsSurrounded() const;
-        CarcassoneType GetType() const;
-        CarcassoneType type_;  // The type of the tile
+        const CarcassoneTileContent type;  // The type of the tile
+        Partisan* partisan;
 };
 
 #endif

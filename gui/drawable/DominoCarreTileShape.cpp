@@ -1,6 +1,6 @@
 #include "DominoCarreTileShape.hpp"
 
-DominoCarreTileShape::DominoCarreTileShape(DominoCarreTuile* dominoCarre): TileShape<DominoCarreTuile> { dominoCarre } {
+DominoCarreTileShape::DominoCarreTileShape(DominoCarreTile* dominoCarre): TileShape<DominoCarreTile> { dominoCarre } {
     square.setFillColor(sf::Color::White);
     square.setOutlineColor(sf::Color::Black);
     square.setOutlineThickness(1);
@@ -29,7 +29,7 @@ DominoCarreTileShape::~DominoCarreTileShape() {
 }
 
 void DominoCarreTileShape::setSize(const float size) {
-    TileShape<DominoCarreTuile>::setSize(size);
+    TileShape<DominoCarreTile>::setSize(size);
 
     const unsigned int characterSize = size / 4;
 

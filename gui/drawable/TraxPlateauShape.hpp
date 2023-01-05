@@ -12,6 +12,7 @@ class TraxPlateauShape: public PlateauShape<Trax, TraxTileShape, PlayerShape<Jou
 
     protected:
         virtual void onDrawnTileClick(const sf::Event::MouseButtonEvent event);
+        virtual void onBoardTileClick(const sf::Event::MouseButtonEvent event);
 
 };
 
