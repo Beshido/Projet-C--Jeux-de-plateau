@@ -9,7 +9,7 @@
 
 template <typename P, typename TileShape, typename PlayerShape> class PlateauShape: public sf::Drawable, public sf::Transformable {
     public:
-        PlateauShape(P* plateau): plateau { plateau }, tilesShape { std::vector<std::vector<TileShape*>>{} } , drawButton { Bouton { "Piocher" } } {
+        PlateauShape(P* plateau): plateau { plateau }, tilesShape { std::vector<std::vector<TileShape*>>{} }, drawButton { Bouton { "Piocher" } }, discardButton { Bouton { "Jeter" } } {
             for (size_t x = 0; x < plateau->getWidth(); x++) {
                 tilesShape.push_back(std::vector<TileShape*>{});
                 for (size_t y = 0; y < plateau->getHeight(); y++) {
@@ -50,6 +50,9 @@ template <typename P, typename TileShape, typename PlayerShape> class PlateauSha
             }
             drawButton.setSize(size.x * 20 / 100, size.y * 10 / 100);
             drawButton.setPosition(plateau->getWidth() * tileSize, 0);
+            discardButton.setSize(size.x * 20 / 100 - tileSize, size.y * 10 / 100);
+            discardButton.setPosition(plateau->getWidth() * tileSize + tileSize, size.y * 10 / 100);
+            
             if (drawnTile) {
                 drawnTile->setSize(tileSize);
                 drawnTile->setPosition(plateau->getWidth() * tileSize, size.y * 10 / 100);
@@ -70,6 +73,9 @@ template <typename P, typename TileShape, typename PlayerShape> class PlateauSha
             if (drawButton.isClicked(event.x, event.y)) {
                 onDrawClick();
             }
+            else if (discardButton.isClicked(event.x, event.y)) {
+                onDiscardClick();
+            }
             else if (drawnTile && drawnTile->isClicked(event.x, event.y)) {
                 onDrawnTileClick(event);
             }
@@ -89,6 +95,7 @@ template <typename P, typename TileShape, typename PlayerShape> class PlateauSha
                 }
             }
             target.draw(drawButton, states);
+            target.draw(discardButton, states);
             if (drawnTile) {
                 target.draw(*drawnTile, states);
             }
@@ -103,6 +110,7 @@ template <typename P, typename TileShape, typename PlayerShape> class PlateauSha
         std::vector<std::vector<TileShape*>> tilesShape;
         std::vector<PlayerShape> playersShape;
         Bouton drawButton;
+        Bouton discardButton;
         TileShape* drawnTile;
 
         sf::Vector2u size;
@@ -110,11 +118,26 @@ template <typename P, typename TileShape, typename PlayerShape> class PlateauSha
 
         const bool onDrawClick() {
             std::cout << "Bouton sac de tuile cliqué." << std::endl;
+            if (!plateau->canDrawTile()) {
+                std::cout << "Le sac est vide." << std::endl;
+                return false;
+            }
+            else if (drawnTile) {
+                std::cout << "Il y a déjà une tuile de piochée." << std::endl;
+                return false;
+            }
+            
             drawnTile = new TileShape { plateau->drawTile() };
-
             drawnTile->setSize(tileSize);
             drawnTile->centerOrigin();
             drawnTile->setPosition(plateau->getWidth() * tileSize, size.y * 10 / 100);
+            return true;
+        }
+
+        const bool onDiscardClick() {
+            std::cout << "Bouton jeter cliqué." << std::endl;
+            plateau->nextPlayerTurn();
+            nextPlayerShape();
             return true;
         }
 
@@ -126,7 +149,7 @@ template <typename P, typename TileShape, typename PlayerShape> class PlateauSha
                     drawnTile->update();
                     break;
                 case sf::Mouse::Right:
-                    std::cout << "Rotaiton droite." << std::endl;
+                    std::cout << "Rotation droite." << std::endl;
                     drawnTile->getTile()->tournerDroite();
                     drawnTile->update();
                     break;
@@ -142,20 +165,23 @@ template <typename P, typename TileShape, typename PlayerShape> class PlateauSha
                 tilesShape.at(x).at(y) = drawnTile;
                 tilesShape.at(x).at(y)->setSize(tileSize);
                 tilesShape.at(x).at(y)->setPosition(x * tileSize, y * tileSize);
-                drawnTile = nullptr;
-                for (size_t i = 0; i < playersShape.size(); i++) {
-                    playersShape.at(i).inactive();
-                    playersShape.at(i).update();
-                }
-                if (plateau->isFinished()) {
-                    std::cout << "La partie est finie." << std::endl;
-                }
-                playersShape.at(plateau->getCurrentPlayerIndex()).active();
-
+                nextPlayerShape();
             }
             else {
                 std::cout << "La tuile n'est pas jouable à cet emplacement." << std::endl;
             }
+        }
+
+        void nextPlayerShape() {
+            drawnTile = nullptr;
+            for (size_t i = 0; i < playersShape.size(); i++) {
+                playersShape.at(i).inactive();
+                playersShape.at(i).update();
+            }
+            if (plateau->isFinished()) {
+                std::cout << "La partie est finie." << std::endl;
+            }
+            playersShape.at(plateau->getCurrentPlayerIndex()).active();
         }
 
         virtual void onBoardTileClick(const sf::Event::MouseButtonEvent event) = 0;

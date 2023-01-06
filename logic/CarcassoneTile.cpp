@@ -57,29 +57,6 @@ CarcassoneTile* CarcassoneTile::createCarcassoneTile(const CarcassoneTileContent
     return carcassoneTile;
 }
 
-const bool CarcassoneTile::placePartisan(Partisan partisan) {
-    switch (partisan) {
-        case Partisan::Knight:
-            if (valeurNord != CarcassoneType::Castle || valeurOuest != CarcassoneType::Castle || valeurEst != CarcassoneType::Castle || valeurSud != CarcassoneType::Castle) {
-                return false;
-            }
-        case Partisan::Thief:
-            if (valeurNord != CarcassoneType::Crossroad || valeurOuest != CarcassoneType::Crossroad || valeurEst != CarcassoneType::Crossroad || valeurSud != CarcassoneType::Crossroad) {
-                return false;
-            }
-        case Partisan::Peasant:
-            if (valeurNord != CarcassoneType::Grass || valeurOuest != CarcassoneType::Grass || valeurEst != CarcassoneType::Grass || valeurSud != CarcassoneType::Grass) {
-                return false;
-            }
-        case Partisan::Monk:
-            if (valeurNord != CarcassoneType::Monastery || valeurOuest != CarcassoneType::Monastery || valeurEst != CarcassoneType::Monastery || valeurSud != CarcassoneType::Monastery) {
-                return false;
-            }
-    }
-    this->partisan = &partisan;
-    return true;
-}
-
 const CarcassoneTileContent CarcassoneTile::getType() const {
     return type;
 }

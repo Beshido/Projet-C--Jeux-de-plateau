@@ -27,5 +27,5 @@ pour le plateau de jeu comme pour les tuiles.
 ## Auteurs 
 
 *   Alban LE JEUNE
-*   Billal SEDDIKI
+*   Bilal SEDDIKI
 

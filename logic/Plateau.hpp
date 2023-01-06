@@ -33,7 +33,7 @@ template <typename P> class Plateau {
         }
 
         P* drawTile() {
-            if (bag.size() < 0) 
+            if (!canDrawTile()) 
                 return nullptr;
 
             size_t random = rand() % bag.size();
@@ -42,15 +42,19 @@ template <typename P> class Plateau {
             return tuile;
         }
 
+        const bool canDrawTile() {
+            return bag.size() > 0;
+        }
+
         const bool placeTile(P* tuile, const size_t x, const size_t y) {
             if (!tuile) return false;
 
             if (isPlayable(tuile, x, y)) {
                 plateau.at(x).at(y) = tuile;
-                if (isNextPlayerTurn()) {
-                    currentPlayer = currentPlayer >= players.size() - 1 ? 0 : currentPlayer + 1;
-                };
                 updateScore(x, y);
+                if (isNextPlayerTurn()) {
+                    nextPlayerTurn();
+                };
                 return true;
             }
             return false;
@@ -77,9 +81,11 @@ template <typename P> class Plateau {
         const size_t getHeight() const { try { return plateau.at(0).size(); } catch (const std::out_of_range& e) { return 0; } catch (...) { return 0; } }
         std::vector<std::vector<P*>> getPlateau() const { return plateau; }
         const std::vector<Joueur<P>*> getPlayers() const { return players; }
+
         const size_t getCurrentPlayerIndex() const { return currentPlayer; }
         const Joueur<P>* getCurrentPlayer() const { return players.at(currentPlayer); }
         const Joueur<P>* getWinner() const { return getHighestScorePlayer(); }
+        void nextPlayerTurn() { currentPlayer = currentPlayer >= players.size() - 1 ? 0 : currentPlayer + 1; }
 
         virtual const bool isPlayable(const P* tuile, const size_t x, const size_t y) const = 0;
         virtual const bool isNextPlayerTurn() const = 0;

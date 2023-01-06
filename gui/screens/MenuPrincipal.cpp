@@ -9,18 +9,17 @@ int MenuPrincipal::run(sf::RenderWindow &window) {
     sf::Sprite background;
     background.setTexture(Assets::mainBackground);
 
-    Bouton boutonDomino { "Domino carre" };
-    boutonDomino.setPosition(70.f, 70.f);
-    boutonDomino.setSize(300.f, 70.f);
-    Bouton boutonTrax { "Trax" };
-    boutonTrax.setPosition(70.f, 200.f);
-    boutonTrax.setSize(300.f, 70.f);
-    boutonTrax.setRectangleColor(sf::Color::Red);
-    Bouton boutonCarcassone { "Carcassone" };
-    boutonCarcassone.setPosition(70.f, 330.f);
-    boutonCarcassone.setSize(300.f, 70.f);
-    boutonCarcassone.setRectangleColor(sf::Color::Yellow);
+    sf::Sprite domino;
+    domino.setTexture(Assets::dominoPanel);
 
+    sf::Sprite trax;
+    trax.setTexture(Assets::traxPanel);
+    trax.setPosition(domino.getTextureRect().width, 0);
+
+    sf::Sprite carcassone;
+    carcassone.setTexture(Assets::carcassonePanel);
+    carcassone.setPosition(domino.getTextureRect().width + trax.getTextureRect().width, 0);
+    
     while (window.isOpen()) {
         sf::Event event;
         while (window.pollEvent(event)) {
@@ -29,15 +28,15 @@ int MenuPrincipal::run(sf::RenderWindow &window) {
                     window.close();
                     break;
                 case sf::Event::MouseButtonPressed:
-                    if (boutonDomino.isClicked(event.mouseButton.x, event.mouseButton.y)) {
+                    if (domino.getGlobalBounds().contains(event.mouseButton.x, event.mouseButton.y)) {
                         std::cout << "Le bouton Domino a été cliqué !" << std::endl;
                         return 1;
                     }
-                    else if (boutonTrax.isClicked(event.mouseButton.x, event.mouseButton.y)) {
+                    else if (trax.getGlobalBounds().contains(event.mouseButton.x, event.mouseButton.y)) {
                         std::cout << "Le bouton Trax a été cliqué !" << std::endl;
                         return 2;
                     }
-                    else if (boutonCarcassone.isClicked(event.mouseButton.x, event.mouseButton.y)) {
+                    else if (carcassone.getGlobalBounds().contains(event.mouseButton.x, event.mouseButton.y)) {
                         std::cout << "Le bouton Carcassone a été cliqué !" << std::endl;
                         return 3;
                     }
@@ -48,9 +47,9 @@ int MenuPrincipal::run(sf::RenderWindow &window) {
         }
         window.clear();
         window.draw(background);
-        window.draw(boutonDomino);
-        window.draw(boutonTrax);
-        window.draw(boutonCarcassone);
+        window.draw(domino);
+        window.draw(trax);
+        window.draw(carcassone);
         window.display();
     }
 

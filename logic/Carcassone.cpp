@@ -6,6 +6,7 @@
 const size_t Carcassone::SIZE = 9;
 
 Carcassone::Carcassone(): Plateau<CarcassoneTile> { SIZE, 4 } {
+    playedPartisans = std::vector<std::vector<std::vector<Partisan>>> { SIZE, std::vector<std::vector<Partisan>> { SIZE, std::vector<Partisan> {} } };
     for (size_t i = 0; i < 9; i++) bag.push_back(CarcassoneTile::createCarcassoneTile(CarcassoneTileContent::GrassCrossroadGrassCrossroad));
     for (size_t i = 0; i < 3; i++) bag.push_back(CarcassoneTile::createCarcassoneTile(CarcassoneTileContent::CityCrossroadGrassCrossroad1));
     for (size_t i = 0; i < 2; i++) bag.push_back(CarcassoneTile::createCarcassoneTile(CarcassoneTileContent::CityCityCrossroadCrossroad1));
@@ -32,6 +33,36 @@ Carcassone::Carcassone(): Plateau<CarcassoneTile> { SIZE, 4 } {
     for (size_t i = 0; i < 3; i++) bag.push_back(CarcassoneTile::createCarcassoneTile(CarcassoneTileContent::GrassCityCityGrass3));
 
     plateau.at(SIZE / 2).at(SIZE / 2) = drawTile();
+}
+
+const bool Carcassone::placePartisan(const size_t x, const size_t y, Partisan partisan) {
+    if (!plateau.at(x).at(y)) {
+        return false;
+    }
+
+    std::vector<CarcassoneType> values = std::vector<CarcassoneType> { plateau.at(x).at(y)->getValeurNord(), plateau.at(x).at(y)->getValeurOuest(), plateau.at(x).at(y)->getValeurEst(), plateau.at(x).at(y)->getValeurSud() };
+    CarcassoneType value;
+    switch (partisan) {
+        case Partisan::Knight:
+            value = CarcassoneType::Castle; 
+            break;
+        case Partisan::Thief:
+            value = CarcassoneType::Crossroad;
+            break;
+        case Partisan::Peasant:
+            value = CarcassoneType::Grass;
+            break;
+        case Partisan::Monk:
+            return plateau.at(x).at(y)->getType() == CarcassoneTileContent::GrassGrassGrassGrassMonastery;
+    }
+
+    for (size_t i = 0; i < values.size(); i++) {
+        if (values.at(i) == value) {
+            playedPartisans.at(x).at(y).push_back(partisan);
+            return true;
+        }
+    }
+    return false;
 }
 
 const bool Carcassone::isSurrounded(const size_t x, const size_t y) const {

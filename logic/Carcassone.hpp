@@ -9,6 +9,7 @@ class Carcassone : public Plateau<CarcassoneTile> {
         Carcassone();
         const bool isSurrounded(const size_t x, const size_t y) const;
         const bool isCompleted(const size_t x, const size_t y) const;
+        const bool placePartisan(const size_t x, const size_t y, Partisan partisan);
         
         virtual const bool isFinished() const;
         virtual const bool isNextPlayerTurn() const;
@@ -16,6 +17,7 @@ class Carcassone : public Plateau<CarcassoneTile> {
         virtual void updateScore(const size_t x, const size_t y);
 
     private:
+        std::vector<std::vector<std::vector<Partisan>>> playedPartisans;
         static const size_t SIZE;
 };
 

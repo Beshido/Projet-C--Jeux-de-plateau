@@ -14,6 +14,7 @@ class CarcassonePlateauShape: public PlateauShape<Carcassone, CarcassoneTileShap
     protected:
         virtual void onDrawnTileClick(const sf::Event::MouseButtonEvent event);
         virtual void onBoardTileClick(const sf::Event::MouseButtonEvent event);
+        void placePartisanIfPossible(const sf::Event::MouseButtonEvent event);
 };
 
 #endif
