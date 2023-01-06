@@ -6,6 +6,8 @@ const unsigned int DominoCarre::MIN_VALUE = 100;
 const unsigned int DominoCarre::MAX_VALUE = 999;
 const unsigned int DominoCarre::SIZE = 8;
 
+
+
 std::vector<unsigned int> DominoCarre::values = { 234, 432, 109, 901, 162, 261, 203, 302, 549, 945 };
 
 DominoCarre::DominoCarre(const size_t size, const size_t amountPlayers): Plateau<DominoCarreTile> { size, amountPlayers } {
@@ -13,6 +15,7 @@ DominoCarre::DominoCarre(const size_t size, const size_t amountPlayers): Plateau
     for (size_t i = 0; i < size; i++) {
         DominoCarreTile* tuile = new DominoCarreTile { rand() % (MAX_VALUE - MIN_VALUE + 1) + MIN_VALUE, values.at(rand() % values.size()), rand() % (MAX_VALUE - MIN_VALUE + 1) + MIN_VALUE, values.at(rand() % values.size()) };
         bag.push_back(tuile);
+        
     }
     plateau.at(SIZE / 2).at(SIZE / 2) = drawTile();
 }
