@@ -1,8 +1,8 @@
 #include "TraxTileShape.hpp"
 #include "../Assets.hpp"
 
-const sf::IntRect TraxTileShape::standart = sf::IntRect { 0, 0, 68, 68 }; // 150x68
-const sf::IntRect TraxTileShape::flipped = sf::IntRect { 82, 0, 68, 68 };
+const sf::IntRect TraxTileShape::standart = sf::IntRect { 4, 5, 60, 60 }; // 150x68
+const sf::IntRect TraxTileShape::flipped = sf::IntRect { 86, 5, 60, 60 };
 
 TraxTileShape::TraxTileShape(TraxTile* tile): TileShape<TraxTile> { tile } {
     square.setTexture(&Assets::trax);

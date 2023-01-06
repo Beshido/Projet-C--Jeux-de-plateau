@@ -1,5 +1,6 @@
 #include "Carcassone.hpp"
 #include "CarcassoneTile.hpp"
+#include <algorithm>
 #include <random>
 #include <vector>
 
@@ -7,6 +8,7 @@ const size_t Carcassone::SIZE = 9;
 
 Carcassone::Carcassone(): Plateau<CarcassoneTile> { SIZE, 4 } {
     playedPartisans = std::vector<std::vector<std::vector<Partisan>>> { SIZE, std::vector<std::vector<Partisan>> { SIZE, std::vector<Partisan> {} } };
+    
     for (size_t i = 0; i < 9; i++) bag.push_back(CarcassoneTile::createCarcassoneTile(CarcassoneTileContent::GrassCrossroadGrassCrossroad));
     for (size_t i = 0; i < 3; i++) bag.push_back(CarcassoneTile::createCarcassoneTile(CarcassoneTileContent::CityCrossroadGrassCrossroad1));
     for (size_t i = 0; i < 2; i++) bag.push_back(CarcassoneTile::createCarcassoneTile(CarcassoneTileContent::CityCityCrossroadCrossroad1));
@@ -31,6 +33,13 @@ Carcassone::Carcassone(): Plateau<CarcassoneTile> { SIZE, 4 } {
     bag.push_back(CarcassoneTile::createCarcassoneTile(CarcassoneTileContent::CrossroadCrossroadCrossroadCrossroad));
     for (size_t i = 0; i < 2; i++) bag.push_back(CarcassoneTile::createCarcassoneTile(CarcassoneTileContent::CityCityGrassGrass2));
     for (size_t i = 0; i < 3; i++) bag.push_back(CarcassoneTile::createCarcassoneTile(CarcassoneTileContent::GrassCityCityGrass3));
+
+    srand(time(NULL));
+
+    for (size_t i = 0; i < bag.size(); i++) {
+        size_t j = rand() % bag.size();
+        std::swap(bag[i], bag[j]);
+    }
 
     plateau.at(SIZE / 2).at(SIZE / 2) = drawTile();
 }
@@ -70,6 +79,24 @@ const bool Carcassone::isSurrounded(const size_t x, const size_t y) const {
     for (size_t i = 0; i < adjacentTiles.size(); i++) {
         if (!adjacentTiles.at(i)) return false;
     }
+    return true;
+}
+
+const bool Carcassone::checkMonasteryRules(const size_t x, const size_t y) const {
+    if (!plateau.at(x).at(y)) {
+        return false;
+    }
+
+    if (plateau.at(x).at(y)->getType() != CarcassoneTileContent::GrassGrassGrassGrassMonastery) {
+        return false;
+    }
+
+    std::vector<const CarcassoneTile *> adjacentTiles = getAdjacentTiles(x, y);
+    if (adjacentTiles.at(0) != nullptr) return false;
+    if (adjacentTiles.at(1) != nullptr) return false;
+    if (adjacentTiles.at(2) != nullptr) return false;
+    if (adjacentTiles.at(3) != nullptr) return false;
+
     return true;
 }
 

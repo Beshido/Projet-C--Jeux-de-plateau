@@ -1,4 +1,5 @@
 #include "DominoCarre.hpp"
+#include "GC.hpp"
 #include <random>
 #include <vector>
 
@@ -15,7 +16,7 @@ DominoCarre::DominoCarre(const size_t size, const size_t amountPlayers): Plateau
     for (size_t i = 0; i < size; i++) {
         DominoCarreTile* tuile = new DominoCarreTile { rand() % (MAX_VALUE - MIN_VALUE + 1) + MIN_VALUE, values.at(rand() % values.size()), rand() % (MAX_VALUE - MIN_VALUE + 1) + MIN_VALUE, values.at(rand() % values.size()) };
         bag.push_back(tuile);
-        
+        GC::add(tuile);
     }
     plateau.at(SIZE / 2).at(SIZE / 2) = drawTile();
 }

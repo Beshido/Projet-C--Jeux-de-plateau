@@ -1,23 +1,18 @@
 #include "MenuPrincipal.hpp"
+#include "../../logic/GC.hpp"
 #include "../Assets.hpp"
 #include "../drawable/Bouton.hpp"
 #include <iostream>
 
 int MenuPrincipal::run(sf::RenderWindow &window) {
+    GC::nettoie();
+
     window.setFramerateLimit(30);
 
-    sf::Sprite background;
-    background.setTexture(Assets::mainBackground);
-
-    sf::Sprite domino;
-    domino.setTexture(Assets::dominoPanel);
-
-    sf::Sprite trax;
-    trax.setTexture(Assets::traxPanel);
+    sf::Sprite domino { Assets::dominoPanel };
+    sf::Sprite trax { Assets::traxPanel };
     trax.setPosition(domino.getTextureRect().width, 0);
-
-    sf::Sprite carcassone;
-    carcassone.setTexture(Assets::carcassonePanel);
+    sf::Sprite carcassone { Assets::carcassonePanel };
     carcassone.setPosition(domino.getTextureRect().width + trax.getTextureRect().width, 0);
     
     while (window.isOpen()) {
@@ -25,6 +20,7 @@ int MenuPrincipal::run(sf::RenderWindow &window) {
         while (window.pollEvent(event)) {
             switch (event.type) {
                 case sf::Event::Closed:
+                    GC::nettoie();
                     window.close();
                     break;
                 case sf::Event::MouseButtonPressed:
@@ -46,7 +42,6 @@ int MenuPrincipal::run(sf::RenderWindow &window) {
             }
         }
         window.clear();
-        window.draw(background);
         window.draw(domino);
         window.draw(trax);
         window.draw(carcassone);

@@ -10,6 +10,7 @@ class Carcassone : public Plateau<CarcassoneTile> {
         const bool isSurrounded(const size_t x, const size_t y) const;
         const bool isCompleted(const size_t x, const size_t y) const;
         const bool placePartisan(const size_t x, const size_t y, Partisan partisan);
+        const bool checkMonasteryRules(const size_t x, const size_t y) const;
         
         virtual const bool isFinished() const;
         virtual const bool isNextPlayerTurn() const;

@@ -1,8 +1,8 @@
 CPP=g++ --std=c++11 -Wall
 BIN=bin/
 
-all : $(BIN)Bouton.o $(BIN)CarcassonePlateauShape.o $(BIN)CarcassoneTileShape.o $(BIN)DominoCarreTileShape.o $(BIN)DominoCarrePlateauShape.o $(BIN)TraxPlateauShape.o $(BIN)TraxTileShape.o $(BIN)CarcassoneScreen.o $(BIN)DominoCarreScreen.o $(BIN)MenuPrincipal.o $(BIN)TraxScreen.o $(BIN)Assets.o $(BIN)Carcassone.o $(BIN)CarcassoneTile.o $(BIN)DominoCarre.o $(BIN)DominoCarreTile.o $(BIN)Trax.o $(BIN)TraxTile.o $(BIN)main.o
-	$(CPP) $(BIN)Bouton.o $(BIN)CarcassonePlateauShape.o $(BIN)CarcassoneTileShape.o $(BIN)DominoCarreTileShape.o $(BIN)DominoCarrePlateauShape.o $(BIN)TraxPlateauShape.o $(BIN)TraxTileShape.o $(BIN)CarcassoneScreen.o $(BIN)DominoCarreScreen.o $(BIN)MenuPrincipal.o $(BIN)TraxScreen.o $(BIN)Assets.o $(BIN)Carcassone.o $(BIN)CarcassoneTile.o $(BIN)DominoCarre.o $(BIN)DominoCarreTile.o $(BIN)Trax.o $(BIN)TraxTile.o $(BIN)main.o -o $(BIN)sfml-app -lsfml-graphics -lsfml-window -lsfml-system
+all : $(BIN)Bouton.o $(BIN)CarcassonePlateauShape.o $(BIN)CarcassoneTileShape.o $(BIN)DominoCarreTileShape.o $(BIN)DominoCarrePlateauShape.o $(BIN)TraxPlateauShape.o $(BIN)TraxTileShape.o $(BIN)CarcassoneScreen.o $(BIN)DominoCarreScreen.o $(BIN)MenuPrincipal.o $(BIN)TraxScreen.o $(BIN)Assets.o $(BIN)Carcassone.o $(BIN)CarcassoneTile.o $(BIN)DominoCarre.o $(BIN)DominoCarreTile.o $(BIN)GC.o $(BIN)Trax.o $(BIN)TraxTile.o $(BIN)main.o
+	$(CPP) $(BIN)Bouton.o $(BIN)CarcassonePlateauShape.o $(BIN)CarcassoneTileShape.o $(BIN)DominoCarreTileShape.o $(BIN)DominoCarrePlateauShape.o $(BIN)TraxPlateauShape.o $(BIN)TraxTileShape.o $(BIN)CarcassoneScreen.o $(BIN)DominoCarreScreen.o $(BIN)MenuPrincipal.o $(BIN)TraxScreen.o $(BIN)Assets.o $(BIN)Carcassone.o $(BIN)CarcassoneTile.o $(BIN)DominoCarre.o $(BIN)DominoCarreTile.o $(BIN)GC.o $(BIN)Trax.o $(BIN)TraxTile.o $(BIN)main.o -o $(BIN)sfml-app -lsfml-graphics -lsfml-window -lsfml-system
 	./$(BIN)sfml-app
 
 $(BIN)Bouton.o : gui/drawable/Bouton.cpp
@@ -52,6 +52,9 @@ $(BIN)DominoCarre.o : logic/DominoCarre.cpp
 
 $(BIN)DominoCarreTile.o : logic/DominoCarreTile.cpp
 	$(CPP) -c logic/DominoCarreTile.cpp -o $(BIN)DominoCarreTile.o
+
+$(BIN)GC.o : logic/GC.cpp
+	$(CPP) -c logic/GC.cpp -o $(BIN)GC.o
 
 $(BIN)Trax.o : logic/Trax.cpp
 	$(CPP) -c logic/Trax.cpp -o $(BIN)Trax.o

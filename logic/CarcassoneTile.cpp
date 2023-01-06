@@ -1,4 +1,5 @@
 #include "CarcassoneTile.hpp"
+#include "GC.hpp"
 
 CarcassoneTile::CarcassoneTile(const CarcassoneTileContent type, const CarcassoneType typeNord, const CarcassoneType typeOuest, const CarcassoneType typeEst, const CarcassoneType typeSud): Tile<CarcassoneType> { typeNord, typeOuest, typeEst, typeSud }, type { type } {}
 
@@ -54,6 +55,7 @@ CarcassoneTile* CarcassoneTile::createCarcassoneTile(const CarcassoneTileContent
         case CarcassoneTileContent::GrassCityCityGrass3:
             carcassoneTile = new CarcassoneTile { CarcassoneTileContent::GrassCityCityGrass3, CarcassoneType::Grass, CarcassoneType::City, CarcassoneType::City, CarcassoneType::Grass }; break;
     }
+    GC::add(carcassoneTile);
     return carcassoneTile;
 }
 
