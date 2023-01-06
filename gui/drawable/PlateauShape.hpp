@@ -136,6 +136,10 @@ template <typename P, typename TileShape, typename PlayerShape> class PlateauSha
 
         const bool onDiscardClick() {
             std::cout << "Bouton jeter cliqué." << std::endl;
+            if (!drawnTile) {
+                std::cout << "Il faut piocher avant !" << std::endl;
+                return false;
+            }
             plateau->nextPlayerTurn();
             nextPlayerShape();
             return true;
@@ -179,7 +183,7 @@ template <typename P, typename TileShape, typename PlayerShape> class PlateauSha
                 playersShape.at(i).update();
             }
             if (plateau->isFinished()) {
-                std::cout << "La partie est finie." << std::endl;
+                std::cout << "La partie est finie.\nLe gagnant est... le " << plateau->getWinner()->getName() << " !" << std::endl;
             }
             playersShape.at(plateau->getCurrentPlayerIndex()).active();
         }

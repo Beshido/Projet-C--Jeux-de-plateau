@@ -18,8 +18,6 @@ class DominoCarre: public Plateau<DominoCarreTile> {
         static const unsigned int MAX_VALUE;
         static const unsigned int SIZE;
         static std::vector<unsigned int> values;
-        static int pickRandomElement(const std::vector<int>& vec);
-        static int generateRandomInt();
 
         const int sumDigits(const unsigned int n) const;
 };

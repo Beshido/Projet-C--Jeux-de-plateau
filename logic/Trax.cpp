@@ -80,10 +80,10 @@ const bool Trax::isForcedMove(const size_t x, const size_t y) const {
 
     const std::vector<const TraxTile*> adjacentTiles = getAdjacentTiles(x, y);
     std::vector<TraxCouleur> adjacentTilesValues {};
-    if (adjacentTiles.at(0)) adjacentTilesValues.push_back(adjacentTiles.at(0)->getValeurNord());
-    if (adjacentTiles.at(1)) adjacentTilesValues.push_back(adjacentTiles.at(1)->getValeurOuest());
-    if (adjacentTiles.at(2)) adjacentTilesValues.push_back(adjacentTiles.at(2)->getValeurEst());
-    if (adjacentTiles.at(3)) adjacentTilesValues.push_back(adjacentTiles.at(3)->getValeurSud());
+    if (adjacentTiles.at(0)) adjacentTilesValues.push_back(adjacentTiles.at(0)->getValeurSud());
+    if (adjacentTiles.at(1)) adjacentTilesValues.push_back(adjacentTiles.at(1)->getValeurEst());
+    if (adjacentTiles.at(2)) adjacentTilesValues.push_back(adjacentTiles.at(2)->getValeurOuest());
+    if (adjacentTiles.at(3)) adjacentTilesValues.push_back(adjacentTiles.at(3)->getValeurNord());
 
     if (adjacentTilesValues.size() < 2) return false;
 
