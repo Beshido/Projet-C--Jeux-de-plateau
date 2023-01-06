@@ -7,6 +7,8 @@ const unsigned int DominoCarre::MIN_VALUE = 100;
 const unsigned int DominoCarre::MAX_VALUE = 999;
 const unsigned int DominoCarre::SIZE = 8;
 
+
+
 std::vector<unsigned int> DominoCarre::values = { 234, 432, 109, 901, 162, 261, 203, 302, 549, 945 };
 
 DominoCarre::DominoCarre(const size_t size, const size_t amountPlayers): Plateau<DominoCarreTile> { size, amountPlayers } {
