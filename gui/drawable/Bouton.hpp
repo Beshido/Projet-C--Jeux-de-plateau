@@ -7,7 +7,9 @@
 
 class Bouton: public sf::Drawable, public sf::Transformable {
     public:
+        Bouton();
         Bouton(const std::string label);
+        Bouton(const std::string label, const sf::Color bgColor, sf::Color textColor);
         const sf::Vector2f getSize() const;
         void setSize(const float width, const float height);
         void setTextColor(const sf::Color color);

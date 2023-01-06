@@ -1,6 +1,7 @@
 #ifndef _Plateau
 #define _Plateau
 
+#include "GC.hpp"
 #include "Joueur.hpp"
 #include <stdexcept>
 #include <vector>
@@ -11,25 +12,12 @@ template <typename P> class Plateau {
             for (size_t i = 0; i < amountPlayers; i++) {
                 std::string playerName = "Joueur ";
                 playerName.append(std::to_string(i + 1));
+
+                Joueur<P>* joueur = new Joueur<P> { playerName };
                 players.push_back(new Joueur<P> { playerName });
+                GC::add(joueur);
             }
             currentPlayer = 0;
-        }
-
-        ~Plateau() {
-            std::cout << "Plateau détruit." << std::endl;
-            for (size_t i = 0; i < plateau.size(); i++) {
-                for (size_t j = 0; j < plateau.at(i).size(); j++) {
-                    /* delete plateau.at(i).at(j); */
-                }
-            }
-            for (size_t i = 0; i < bag.size(); i++) {
-                /* delete bag.at(i); */
-            }
-            for (size_t i = 0; i < players.size(); i++) {
-                /* delete players.at(i); */
-            }
-            std::cout << "Plateau détruit." << std::endl;
         }
 
         P* drawTile() {

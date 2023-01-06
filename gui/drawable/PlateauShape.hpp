@@ -9,7 +9,7 @@
 
 template <typename P, typename TileShape, typename PlayerShape> class PlateauShape: public sf::Drawable, public sf::Transformable {
     public:
-        PlateauShape(P* plateau): plateau { plateau }, tilesShape { std::vector<std::vector<TileShape*>>{} }, drawButton { Bouton { "Piocher" } }, discardButton { Bouton { "Jeter" } } {
+        PlateauShape(P* plateau, const sf::Color color1, const sf::Color color2): plateau { plateau }, tilesShape { std::vector<std::vector<TileShape*>>{} }, drawButton { Bouton { "Piocher", color1, color2 } }, discardButton { Bouton { "Jeter", color1, color2 } }, color1 { color1 }, color2 { color2 } {
             for (size_t x = 0; x < plateau->getWidth(); x++) {
                 tilesShape.push_back(std::vector<TileShape*>{});
                 for (size_t y = 0; y < plateau->getHeight(); y++) {
@@ -23,15 +23,9 @@ template <typename P, typename TileShape, typename PlayerShape> class PlateauSha
             }
             drawnTile = nullptr;
             for (size_t i = 0; i < plateau->getPlayers().size(); i++) {
-                playersShape.push_back(PlayerShape { plateau->getPlayers().at(i) });
-            }
+                playersShape.push_back(PlayerShape { plateau->getPlayers().at(i), color1, color2 });
+            }   
             playersShape.at(plateau->getCurrentPlayerIndex()).active();
-        }
-        
-        ~PlateauShape() {
-            /* delete plateau;
-            delete drawnTile; */
-            std::cout << "PlateauShape supprimé." << std::endl;
         }
 
         const sf::Vector2u getSize() const {
@@ -59,7 +53,7 @@ template <typename P, typename TileShape, typename PlayerShape> class PlateauSha
             }
             for (size_t i = 0; i < playersShape.size(); i++) {
                 playersShape.at(i).setSize(size.x * 20 / 100, size.y * 10 / 100);
-                playersShape.at(i).setPosition(plateau->getWidth() * tileSize, (size.y * 10 / 100 + tileSize) * (i + 1));
+                playersShape.at(i).setPosition(plateau->getWidth() * tileSize + 10, (size.y * 10 / 100 + tileSize + 10) + (i * (size.y * 10 / 100) + i * 10));
             }
 
             this->size = size;
@@ -115,6 +109,9 @@ template <typename P, typename TileShape, typename PlayerShape> class PlateauSha
 
         sf::Vector2u size;
         unsigned int tileSize;
+
+        sf::Color color1;
+        sf::Color color2;
 
         const bool onDrawClick() {
             std::cout << "Bouton sac de tuile cliqué." << std::endl;

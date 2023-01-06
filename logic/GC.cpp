@@ -1,16 +1,18 @@
 #include "GC.hpp"
 
-using namespace std;
-
-vector<void*> GC::ptrs;
+std::vector<void*> GC::ptrs;
 
 void GC::add(void* ptr) {
+    std::cout << "Ajout de " << ptr << " au Garbage Collector." << std::endl;
     ptrs.push_back(ptr);
 }
+
 void GC::nettoie() {    
-    cout << "Vidage du Garbage Collector..." << endl;
+    std::cout << "Vidage du Garbage Collector..." << std::endl;
     for (auto ptr : ptrs) {
+        std::cout << "Suppression de " << ptr << " du Garbage Collector." << std::endl;
         delete ptr;
     }
-    cout << "Garbage Collector vidé." << endl;
+    ptrs.clear();
+    std::cout << "Garbage Collector vidé." << std::endl;
 }

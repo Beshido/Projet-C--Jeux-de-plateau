@@ -10,21 +10,24 @@
 
 int TraxScreen::run(sf::RenderWindow &window) {    
     sf::Sprite background;
-    background.setTexture(Assets::plateauBackground);
+    background.setTexture(Assets::traxBackground);
 
     Trax trax {};
     TraxPlateauShape traxGui { &trax };
     traxGui.setSize(window.getSize().x * 80 / 100, window.getSize().y);
 
-    Bouton quit = Bouton { "Quitter" };
+    Bouton quit = Bouton { "Quitter", sf::Color::Black, sf::Color::Red };
     quit.setSize(window.getSize().x * 20 / 100, window.getSize().y * 10 / 100);
     quit.setPosition(window.getSize().x * 80 / 100, 0);
-
+    sf::Sprite traxPanel { Assets::traxPanel };
+    traxPanel.setScale(0.6f, 0.6f);
+    traxPanel.setPosition(window.getSize().x * 80 / 100, window.getSize().y * 10 / 100);
     while (window.isOpen()) {
         sf::Event event;
         while (window.pollEvent(event)) {
             switch (event.type) {
                 case sf::Event::Closed:
+                    GC::nettoie();
                     window.close();
                     break;
                 case sf::Event::Resized:
@@ -46,6 +49,7 @@ int TraxScreen::run(sf::RenderWindow &window) {
         window.clear();
         window.draw(background);
         window.draw(quit);
+        window.draw(traxPanel);
         window.draw(traxGui);
         window.display();
     }

@@ -9,6 +9,7 @@
 class DominoCarreTileShape: public TileShape<DominoCarreTile> {
     public:
         DominoCarreTileShape(DominoCarreTile* dominoCarre);
+        DominoCarreTileShape(DominoCarreTile* dominoCarre, sf::Color bg, sf::Color outline, sf::Color ColorN, sf::Color ColorO, sf::Color ColorE, sf::Color ColorS);
         DominoCarreTileShape(DominoCarreTileShape* dominoCarreTileShape);
         ~DominoCarreTileShape();
         void setSize(const float size);

@@ -4,9 +4,13 @@
 const unsigned int Bouton::DEFAULT_WIDTH = 300;
 const unsigned int Bouton::DEFAULT_HEIGHT = 300;
 
-Bouton::Bouton(const std::string label): rectangle { sf::RectangleShape { sf::Vector2f { DEFAULT_WIDTH, DEFAULT_HEIGHT } } }, text { sf::Text { label, Assets::font, DEFAULT_HEIGHT / 2 } } {
-    text.setFillColor(sf::Color::Black);
-    rectangle.setFillColor(sf::Color::White);
+Bouton::Bouton(): Bouton { "" } {}
+
+Bouton::Bouton(const std::string label): Bouton { label, sf::Color::White, sf::Color::Black } {}
+
+Bouton::Bouton(const std::string label, const sf::Color bgColor, const sf::Color textColor): rectangle { sf::RectangleShape { sf::Vector2f { DEFAULT_WIDTH, DEFAULT_HEIGHT } } }, text { sf::Text { label, Assets::font, DEFAULT_HEIGHT / 2 } } {
+    rectangle.setFillColor(bgColor);
+    text.setFillColor(textColor);
 }
 
 const sf::Vector2f Bouton::getSize() const {

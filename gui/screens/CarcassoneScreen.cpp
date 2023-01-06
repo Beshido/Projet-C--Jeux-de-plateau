@@ -6,22 +6,25 @@
 #include "../../logic/Carcassone.hpp"
 
 int CarcassoneScreen::run(sf::RenderWindow &window) {
-    sf::Sprite background;
-    background.setTexture(Assets::plateauBackground);
+    sf::Sprite background { Assets::carcassoneBackground };
 
     Carcassone carcassone {};
     CarcassonePlateauShape carcassoneGui { &carcassone };
     carcassoneGui.setSize(window.getSize().x * 80 / 100, window.getSize().y);
 
-    Bouton quit = Bouton { "Quitter" };
+    Bouton quit = Bouton { "Quitter", sf::Color::Cyan, sf::Color::White };
     quit.setSize(window.getSize().x * 20 / 100, window.getSize().y * 10 / 100);
     quit.setPosition(window.getSize().x * 80 / 100, 0);
+    sf::Sprite carcassonePanel { Assets::carcassonePanel };
+    carcassonePanel.setScale(0.6f, 0.6f);
+    carcassonePanel.setPosition(window.getSize().x * 80 / 100, window.getSize().y * 10 / 100);
 
     while (window.isOpen()) {
         sf::Event event;
         while (window.pollEvent(event)) {
             switch (event.type) {
                 case sf::Event::Closed:
+                    GC::nettoie();
                     window.close();
                     break;
                 case sf::Event::Resized:
@@ -43,6 +46,7 @@ int CarcassoneScreen::run(sf::RenderWindow &window) {
         window.clear();
         window.draw(background);
         window.draw(quit);
+        window.draw(carcassonePanel);
         window.draw(carcassoneGui);
         window.display();
     }

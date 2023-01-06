@@ -7,29 +7,26 @@
 
 template <typename Player> class PlayerShape: public sf::Drawable, public sf::Transformable {
     public:
-        PlayerShape(Player* player): player { player } {
-            rectangle.setFillColor(sf::Color::White);
+        PlayerShape(Player* player, const sf::Color color1, const sf::Color color2): player { player }, color1 { color1 }, color2 { color2 } {
+            rectangle.setFillColor(color1);
+            rectangle.setOutlineColor(color1);
             rectangle.setOutlineThickness(3);
 
             name.setFont(Assets::font);
-            name.setFillColor(sf::Color::Black);
+            name.setFillColor(color2);
             name.setString(player->getName());
             score.setFont(Assets::font);
-            score.setFillColor(sf::Color::Black);
+            score.setFillColor(color2);
 
             update();
         }
         
-        ~PlayerShape() {
-            std::cout << "PlayerShape supprimé." << std::endl;
-        }
-
         void active() {
-            rectangle.setOutlineColor(sf::Color::Red);
+            rectangle.setOutlineColor(color2);
         }
 
         void inactive() {
-            rectangle.setOutlineColor(sf::Color::Black);
+            rectangle.setOutlineColor(color1);
         }
 
         void setSize(const float x, const float y) {
@@ -56,6 +53,9 @@ template <typename Player> class PlayerShape: public sf::Drawable, public sf::Tr
         sf::RectangleShape rectangle;
         sf::Text name;
         sf::Text score;
+
+        sf::Color color1;
+        sf::Color color2;
 };
 
 #endif

@@ -14,11 +14,6 @@ template <typename P> class TileShape: public sf::Drawable, public sf::Transform
         TileShape(TileShape<P>* tileShape): TileShape { tileShape->getTile() } {
             setSize(tileShape->getSize().x);
         }
-        
-        ~TileShape() {
-            /* delete tile; */
-            std::cout << "TileShape supprimé." << std::endl;    
-        }
 
         const bool isClicked(const float x, const float y) const { return sf::FloatRect { getPosition(), getSize() }.contains(x, y); }
         

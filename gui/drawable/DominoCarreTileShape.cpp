@@ -1,23 +1,25 @@
 #include "DominoCarreTileShape.hpp"
 
-DominoCarreTileShape::DominoCarreTileShape(DominoCarreTile* dominoCarre): TileShape<DominoCarreTile> { dominoCarre } {
-    square.setFillColor(sf::Color::White);
-    square.setOutlineColor(sf::Color::Black);
+DominoCarreTileShape::DominoCarreTileShape(DominoCarreTile* dominoCarre): DominoCarreTileShape { dominoCarre, sf::Color::Black, sf::Color::Green, sf::Color::Green, sf::Color::Green, sf::Color::Green, sf::Color::Green } {}
+
+DominoCarreTileShape::DominoCarreTileShape(DominoCarreTile* dominoCarre, sf::Color bg, sf::Color outline, sf::Color ColorN, sf::Color ColorO, sf::Color ColorE, sf::Color ColorS): TileShape<DominoCarreTile> { dominoCarre } {
+    square.setFillColor(bg);
+    square.setOutlineColor(outline);
     square.setOutlineThickness(1);
 
     nombreNord.setFont(Assets::font);
-    nombreNord.setFillColor(sf::Color::Black);
+    nombreNord.setFillColor(ColorN);
 
     nombreOuest.setFont(Assets::font);
-    nombreOuest.setFillColor(sf::Color::Green);
+    nombreOuest.setFillColor(ColorO);
     nombreOuest.setLineSpacing(0.5);
     
     nombreEst.setFont(Assets::font);
-    nombreEst.setFillColor(sf::Color::Red);
+    nombreEst.setFillColor(ColorE);
     nombreEst.setLineSpacing(0.5);
     
     nombreSud.setFont(Assets::font);
-    nombreSud.setFillColor(sf::Color::Blue);
+    nombreSud.setFillColor(ColorS);
 
     update();
 }

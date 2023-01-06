@@ -1,9 +1,12 @@
 #include "Trax.hpp"
+#include "GC.hpp"
 
 Trax::Trax(): Plateau<TraxTile> { 8, 2 } {
     bag = std::vector<TraxTile*> {};
     for (size_t i = 0; i < 64; i++) {
-        bag.push_back(new TraxTile {});
+        TraxTile* traxTile = new TraxTile {};
+        bag.push_back(traxTile);
+        GC::add(traxTile);
     }
     plateau = std::vector<std::vector<TraxTile*>> { 8, std::vector<TraxTile*> { 8, nullptr } };
     firstPlay = true;
@@ -11,7 +14,7 @@ Trax::Trax(): Plateau<TraxTile> { 8, 2 } {
 
 const bool Trax::isPlayable(const TraxTile* tuile, const size_t x, const size_t y) const {
     if (isForcedMoveAvailable()) {
-        isForcedMove(x, y) && isAdjacentValuesEqual(tuile, x, y);
+        return isForcedMove(x, y) && isAdjacentValuesEqual(tuile, x, y);
     }
     return isAdjacentValuesEqual(tuile, x, y) || firstPlay;
 }
@@ -19,11 +22,11 @@ const bool Trax::isPlayable(const TraxTile* tuile, const size_t x, const size_t 
 const bool Trax::isFinished() const {
     for (size_t x = 0; x < getWidth(); x++) {
         for (size_t y = 0; y < getHeight(); y++) {
-            if (isFinishedRecursive(TraxCouleur::Black, x, y, plateau.at(x).at(y), x, y, true)) {
+            if (isFinishedRecursive(TraxCouleur::White, x, y, plateau.at(x).at(y), x, y, true)) {
                 players.at(0)->concatenateScore(1);
                 return true;
             }
-            else if (isFinishedRecursive(TraxCouleur::White, x, y, plateau.at(x).at(y), x, y, true)) {
+            else if (isFinishedRecursive(TraxCouleur::Black, x, y, plateau.at(x).at(y), x, y, true)) {
                 players.at(1)->concatenateScore(1);
                 return true;
             }
@@ -69,7 +72,10 @@ void Trax::updateScore(const size_t x, const size_t y) {
 const bool Trax::isForcedMoveAvailable() const {
     for (size_t x = 0; x < getWidth(); x++) { // vérification si un coup forcé est possible. si oui, le joueur actuel continue de jouer.
         for (size_t y = 0; y < getHeight(); y++) {
-            if (isForcedMove(x, y)) return true;
+            if (isForcedMove(x, y)) {
+                std::cout << "Coup forcé détecté !" << std::endl;
+                return true;
+            }
         }
     }
     return false;
@@ -87,10 +93,17 @@ const bool Trax::isForcedMove(const size_t x, const size_t y) const {
 
     if (adjacentTilesValues.size() < 2) return false;
 
-    for (size_t i = 0; i < adjacentTilesValues.size() - 1; i++) {
-        for (size_t j = i + 1; j < adjacentTilesValues.size(); j++) {
-            if (adjacentTilesValues.at(i) == adjacentTilesValues.at(j)) return true;
+    unsigned int compteurBlanc = 0;
+    unsigned int compteurNoir = 0;
+    for (size_t i = 0; i < adjacentTilesValues.size(); i++) {
+        switch (adjacentTilesValues.at(i)) {
+            case TraxCouleur::White:
+                compteurBlanc++;
+                break;
+            case TraxCouleur::Black:
+                compteurNoir++;
+                break;
         }
     }
-    return false;
+    return compteurBlanc >= 2 || compteurNoir >= 2;
 }
