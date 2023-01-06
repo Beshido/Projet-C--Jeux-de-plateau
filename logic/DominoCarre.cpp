@@ -6,10 +6,12 @@ const unsigned int DominoCarre::MIN_VALUE = 100;
 const unsigned int DominoCarre::MAX_VALUE = 999;
 const unsigned int DominoCarre::SIZE = 8;
 
+std::vector<int> DominoCarre::values = {234,974,109,667,162,405,203,111,431,999,342,789,242,624,900,333};
+
 DominoCarre::DominoCarre(const size_t size, const size_t amountPlayers): Plateau<DominoCarreTile> { size, amountPlayers } {
     srand(time(NULL));
     for (size_t i = 0; i < size; i++) {
-        DominoCarreTile* tuile = new DominoCarreTile { 100, 100, 100, 100 };
+        DominoCarreTile* tuile = new DominoCarreTile { generateRandomInt(), pickRandomElement(values), generateRandomInt(), pickRandomElement(values) };
         bag.push_back(tuile);
     }
     plateau.at(SIZE / 2).at(SIZE / 2) = drawTile();
@@ -21,6 +23,16 @@ const bool DominoCarre::isPlayable(const DominoCarreTile* tuile, const size_t x,
 
 const bool DominoCarre::isFinished() const {
     return bag.size() == 0;
+}
+int pickRandomElement(const std::vector<int>& vec) {
+  int index = rand() % vec.size();
+  return vec[index];
+}
+int generateRandomInt() {
+  // Generate a random number between 100 and 999
+  int randomInt = rand() % 900 + 100;
+
+  return randomInt;
 }
 
 void DominoCarre::updateScore(const size_t x, const size_t y) {
