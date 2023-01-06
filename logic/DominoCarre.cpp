@@ -29,9 +29,7 @@ int pickRandomElement(const std::vector<int>& vec) {
   return vec[index];
 }
 int generateRandomInt() {
-  // Generate a random number between 100 and 999
   int randomInt = rand() % 900 + 100;
-
   return randomInt;
 }
 
